@@ -19,6 +19,8 @@ class App{
         
         //getting the request parameters
         $req = $this->parseUrl();
+        // var_dump($req);
+        // die;
         
         //setting the langauge to default language if not specified.
 
@@ -51,7 +53,9 @@ class App{
 
     public function parseUrl(){
         if(isset($_GET['req'])){
-            return $req = explode('/',filter_var(rtrim($_GET['req'],'/'),FILTER_SANITIZE_URL));
+            $req = explode('/',filter_var(rtrim($_GET['req'],'/'),FILTER_SANITIZE_URL));
+
+            return $req;
         }
     }
 

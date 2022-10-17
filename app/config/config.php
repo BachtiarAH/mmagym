@@ -49,8 +49,8 @@ define('URL', URL_PROTOCOL . URL_DOMAIN . URL_SUB_FOLDER);
  */
 define('DB_TYPE', 'mysql');
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'msystem');
-define('DB_USER', 'msys');
-define('DB_PASS', 'root');
+define('DB_NAME', 'mma_gym');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 
 define('DB_CHARSET', 'utf8');
