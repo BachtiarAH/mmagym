@@ -1,62 +1,57 @@
 <?php
-
-class App{
-
-
-    /*
-    * definig defualt parameters if not specified by the user
-    */
-    protected $controller = 'home';
+class App
+{
+    protected $controller = 'Home';
     protected $method = 'index';
-    protected $language = 'en';
     protected $params = [];
 
-    public function __construct(){
-    
-        /* 
-        * GET request should be in the following form : URL/language/controller/method/parameters
-        */
-        
-        //getting the request parameters
-        $req = $this->parseUrl();
-        // var_dump($req);
-        // die;
-        
-        //setting the langauge to default language if not specified.
 
-        if($req != NULL && file_exists('../app/languages/' . $req[0])){
-            define('LANGUAGE', array_shift($req));                    
-        }else{
-            define('LANGUAGE', $this->language);
+    public function __construct()
+    {
+        $url = $this->ParseUrl();
+
+        //set controller jika url null dengan controller default
+        if($url == NULL)
+               {
+			$url = [$this->controller];
+		}
+
+        //set controller dengan url key 0 atau setelah public di url
+        //contoh host/public/[controller]
+        //lalu hapus array key 0 yang ada di dalam url
+        if (file_exists("../app/controllers/".$url[0].".php")) {
+            $this->controller = $url[0];
+            unset($url[0]);
         }
 
-        if(file_exists('../app/controllers/' . $req[0] . '.php')){
-            $this->controller = $req[0];
-            unset($req[0]);
-        }    
-
-        require_once '../app/controllers/' . $this->controller . '.php';
+        require_once "../app/controllers/".$this->controller.".php";
         $this->controller = new $this->controller;
 
-        if(isset($req[1])){
-            if(method_exists($this->controller,$req[1])){
-                $this->method = $req[1];
-                unset($req[1]);
+        //set method dengan value dari url key 1 atau setelah dan seltelahanya lagi dari public
+        //contoh host/public/[controller]/[method]
+        //lalu hapus array key 1 yang ada didalam url
+        if (isset($url[1])) {
+            if (method_exists($this->controller,$url[1])) {
+                $this->method = $url[1];
+                unset($url[1]);
             }
-
         }
-        $this->params = $req ? array_values($req): [];
 
-        //sending the req array as parameters for the method function f(req[0],req[1] ..etc){}
-        call_user_func_array([$this->controller,$this->method], $this->params);
+        //mengambil sisa dari array url dan masukan ke aray params
+        if (!empty($url)) {
+            $this->params = array_values($url);
+        }
+
+        call_user_func_array([$this->controller,$this->method],$this->params);
     }
 
-    public function parseUrl(){
-        if(isset($_GET['req'])){
-            $req = explode('/',filter_var(rtrim($_GET['req'],'/'),FILTER_SANITIZE_URL));
-
-            return $req;
+    public function ParseUrl()
+    {
+        if (isset($_GET['url'])) {
+            $url = rtrim($_GET['url'],'/');
+            $url = filter_var($url,FILTER_SANITIZE_URL);
+            $url = explode('/',$url);
+            return $url;
         }
     }
-
 }
