@@ -1,1 +1,0 @@
-<h1>ini adalah halaman index</h1>
