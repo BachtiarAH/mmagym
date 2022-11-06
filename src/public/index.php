@@ -5,16 +5,20 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use LearnPhpMvc\APP\Router;
 use LearnPhpMvc\controller\api\CompanyControllerApi;
 use LearnPhpMvc\controller\api\PencariMagang;
+// use LearnPhpMvc\controller\api\userContrller;
+use LearnPhpMvc\controller\api\userController;
 use LearnPhpMvc\controller\CompanyController;
 use LearnPhpMvc\controller\HomeController;
 use LearnPhpMvc\controller\ProductController;
 use LearnPhpMvc\controller\LamarController;
 
 
+
 //api
 Router::add('GET', '/api/test', ProductController::class, 'categories');
 Router::add('POST', '/api/add', ProductController::class, 'postCategories');
 Router::add('GET', '/api/pencari-magang/all', PencariMagang::class, 'findAll');
+Router::add('GET','/api/mmagym/userAll',UserController::class,'findALl');
 
 //w=web
 
