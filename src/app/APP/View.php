@@ -8,7 +8,9 @@ class View
     {
         require __DIR__ . '../../view/componen/' .'header.php';
         require __DIR__ . '../../view/componen/' .'style.php';
+        require __DIR__ . '../../view/componen/' . 'bodyStart.php';
         require __DIR__ . '../../view/template/' .'navbar.php';
+        require __DIR__ . '../../view/template/' .'sidebar.php';
         require __DIR__ . '/../view/' . $view. '.php';
         require __DIR__ . '../../view/componen/' .'script.php';
         require __DIR__ . '/../view/componen/' . 'footer.php';

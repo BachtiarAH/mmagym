@@ -25,7 +25,8 @@ Router::add('GET','/api/mmagym/userAll',UserController::class,'findALl');
 // Router::add('GET', '/hello', HomeController::class, 'hello', [AuthMiddleware::class]);
 // Router::add('GET', '/world', HomeController::class, 'world', [AuthMiddleware::class]);
 // Router::add('GET', '/about', HomeController::class, 'about');
-Router::add('GET', '/', LoginController::class, 'index');
+Router::add('GET', '/login', LoginController::class, 'index');
+Router::add('GET', '/', HomeController::class, 'index');
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');
 Router::add('GET', '/company', CompanyController::class, 'bestCompany');
