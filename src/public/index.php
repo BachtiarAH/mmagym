@@ -15,10 +15,17 @@ use LearnPhpMvc\controller\LamarController;
 use LearnPhpMvc\controller\LoginController;
 
 //api
-// Router::add('GET', '/api/test', ProductController::class, 'categories');
-// Router::add('POST', '/api/add', ProductController::class, 'postCategories');
-// Router::add('GET', '/api/pencari-magang/all', PencariMagang::class, 'findAll');
-Router::add('GET','/api/userAll',UserController::class,'findALl');
+
+//user
+Router::add('GET','/api/user/all',UserController::class,'findALl');
+Router::add('POST','/api/user/name',userController::class,"findByName");
+Router::add('POST','/api/user/id',userController::class,"findById");
+Router::add('POST','/api/user/akses',userController::class,"findByAkases");
+Router::add('POST','/api/user/add',userController::class,'addData');
+Router::add('POST','/api/user/edit',userController::class,'editData');
+Router::add('POST','/api/user/delet',userController::class,'deleteData');
+
+//alat
 Router::add('GET','/api/alat/findAll',AlatController::class,'findAll');
 Router::add('POST','/api/alat/findByName',AlatController::class,'findByName');
 
