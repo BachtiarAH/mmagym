@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use LearnPhpMvc\APP\Router;
+use LearnPhpMvc\controller\api\AlatController;
 use LearnPhpMvc\controller\api\CompanyControllerApi;
 use LearnPhpMvc\controller\api\PencariMagang;
 // use LearnPhpMvc\controller\api\userContrller;
@@ -14,10 +15,12 @@ use LearnPhpMvc\controller\LamarController;
 use LearnPhpMvc\controller\LoginController;
 
 //api
-Router::add('GET', '/api/test', ProductController::class, 'categories');
-Router::add('POST', '/api/add', ProductController::class, 'postCategories');
-Router::add('GET', '/api/pencari-magang/all', PencariMagang::class, 'findAll');
-Router::add('GET','/api/mmagym/userAll',UserController::class,'findALl');
+// Router::add('GET', '/api/test', ProductController::class, 'categories');
+// Router::add('POST', '/api/add', ProductController::class, 'postCategories');
+// Router::add('GET', '/api/pencari-magang/all', PencariMagang::class, 'findAll');
+Router::add('GET','/api/userAll',UserController::class,'findALl');
+Router::add('GET','/api/alat/findAll',AlatController::class,'findAll');
+Router::add('POST','/api/alat/findByName',AlatController::class,'findByName');
 
 //w=web
 
