@@ -63,6 +63,67 @@ class AlatRepository{
 
         return $respons;
     }
+
+    public function addData($nama,$gambar)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "INSERT INTO `alat`(`id_alat`, `nama_alat`, `gambar`) VALUES (NULL,'$nama','$gambar')";
+            $stmt = $this->connecetion->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+
+    public function editData($id,$nama, $gambar)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "UPDATE `alat` SET `nama_alat`='$nama',`gambar`='$gambar' WHERE id_alat = $id";
+            $stmt = $this->connecetion->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+    public function deletData($id)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "DELETE FROM `alat` WHERE alat.id_alat = $id";
+            $stmt = $this->connecetion->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
 }
 
 ?>

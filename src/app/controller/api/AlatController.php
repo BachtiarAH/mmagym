@@ -38,4 +38,25 @@ class AlatController
         $data = json_encode($data);
         echo $data;
     }
+
+    public function addData()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->addData($data));
+    }
+
+    public function editData()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->editData($data));
+    }
+
+    public function deleteData()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->deleteData($data));
+    }
 }

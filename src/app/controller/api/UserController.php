@@ -87,4 +87,6 @@ class UserController
         echo json_encode($this->service->deleteData($data));
     }
 
+    
+
 }

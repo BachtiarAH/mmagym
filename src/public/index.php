@@ -16,7 +16,7 @@ use LearnPhpMvc\controller\LoginController;
 
 //api
 
-//user
+//api user
 Router::add('GET','/api/user/all',UserController::class,'findALl');
 Router::add('POST','/api/user/name',userController::class,"findByName");
 Router::add('POST','/api/user/id',userController::class,"findById");
@@ -25,9 +25,12 @@ Router::add('POST','/api/user/add',userController::class,'addData');
 Router::add('POST','/api/user/edit',userController::class,'editData');
 Router::add('POST','/api/user/delet',userController::class,'deleteData');
 
-//alat
+//api alat
 Router::add('GET','/api/alat/findAll',AlatController::class,'findAll');
 Router::add('POST','/api/alat/findByName',AlatController::class,'findByName');
+Router::add('POST','/api/alat/add',AlatController::class,'addData');
+Router::add('POST','/api/alat/edit',AlatController::class,'editData');
+Router::add('POST','/api/alat/delet',AlatController::class,'deleteData');
 
 //w=web
 
