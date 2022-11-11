@@ -10,7 +10,6 @@ class Service{
         
         if ($type == "format") {
             $respons ['status'] = "fail";
-            $respons ['respons_code'] = 400;
             $respons['message'] = "format json salah";
         }
 

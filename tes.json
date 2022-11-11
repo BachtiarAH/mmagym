@@ -1,0 +1,13 @@
+{
+    "status":"oke",
+    "body": [
+        {
+            "nama": "bachtiar",
+            "id":1
+        },
+        {
+            "nama":"arya",
+            "id":2
+        }
+    ]
+}

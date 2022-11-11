@@ -51,7 +51,7 @@ class AlatModel
 $model = new AlatModel();
 $model->setId("1");
 $model->setName("press");
-var_dump($model);
+// var_dump($model);
 
 $json = json_encode($model);
 
@@ -59,11 +59,16 @@ $json = json_encode($model);
 $myArray = json_decode(json_encode ( $model ) , true);;
 
 // var_dump($json);
-echo "<br>";
+// echo "<br>";
 
-var_dump($myArray);
+// var_dump($myArray);
 
 // printf($myArray['AlatModelid']);
 
 $txt = "PHP";
-echo "I love $txt!";
+// echo "I love $txt!";
+
+$json = file_get_contents('tes.json');
+$data = json_decode($json);
+// var_dump($data);
+echo $data->body[0]->nama;
