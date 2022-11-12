@@ -4,6 +4,7 @@
 
 use LearnPhpMvc\APP\View;
 use LearnPhpMvc\Config\Url;
+use LearnPhpMvc\controller\HomeController;
 
 ?>
     <!-- Main Sidebar Container -->
@@ -32,7 +33,7 @@ use LearnPhpMvc\Config\Url;
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="<?=View::getUrl('admin')?>" class="nav-link active">
                             <iconify-icon class="nav-icon fas " icon="carbon:dashboard-reference"></iconify-icon>
                             <p>
                                 Dashboard
@@ -40,7 +41,7 @@ use LearnPhpMvc\Config\Url;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="<?=View::getUrl('user')?>" class="nav-link">
                             <iconify-icon class="nav-icon fas " icon="charm:people"></iconify-icon>
                             <p>
                                 Acounts
@@ -48,7 +49,7 @@ use LearnPhpMvc\Config\Url;
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="" class="nav-link">
                         <iconify-icon class="nav-icon fas" icon="ion:file-tray-stacked"></iconify-icon>
                             <p>
                                 
@@ -58,19 +59,19 @@ use LearnPhpMvc\Config\Url;
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="<?=View::getUrl("/login")?>" class="nav-link">
+                                <a href="<?=View::getUrl('alat')?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Alat</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/charts/flot.html" class="nav-link">
+                                <a href="<?=View::getUrl('gerakan')?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Gerakan</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/charts/inline.html" class="nav-link">
+                                <a href="<?=View::getUrl('menu')?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Menu Latihan</p>
                                 </a>

@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use LearnPhpMvc\APP\Router;
+use LearnPhpMvc\controller\AlatControllerView;
 use LearnPhpMvc\controller\api\AlatController;
 use LearnPhpMvc\controller\api\CompanyControllerApi;
 use LearnPhpMvc\controller\api\GerakanController;
@@ -13,11 +14,15 @@ use LearnPhpMvc\controller\api\RiwayatController;
 // use LearnPhpMvc\controller\api\userContrller;
 use LearnPhpMvc\controller\api\userController;
 use LearnPhpMvc\controller\CompanyController;
+use LearnPhpMvc\controller\GerakanControllerView;
 use LearnPhpMvc\controller\HomeController;
 use LearnPhpMvc\controller\ProductController;
 use LearnPhpMvc\controller\LamarController;
 use LearnPhpMvc\controller\LandingPageController;
 use LearnPhpMvc\controller\LoginController;
+use LearnPhpMvc\controller\MenuLatihanControllerView;
+use LearnPhpMvc\controller\UsersController;
+use LearnPhpMvc\controller\UsersControllerView;
 
 //api
 
@@ -57,12 +62,16 @@ Router::add('POST','/api/jadwal/user',JadwalController::class,'findByUser');
 Router::add('POST','/api/riwayat/user',RiwayatController::class,'findRiwayatGerakanByUser');
 
 //w=web
-
 Router::add('GET', '/admin/login', LoginController::class, 'index');
-Router::add('GET', '/admin', HomeController::class, 'index');
 Router::add('GET', '/', LandingPageController::class, 'index');
 Router::add('POST', '/submit/login', LoginController::class, 'login');
 
+//admin
+Router::add('GET', '/admin', HomeController::class, 'index');
+Router::add('GET', '/alat', AlatControllerView::class, 'index');
+Router::add('GET', '/user', UsersControllerView::class, 'index');
+Router::add('GET', '/gerakan', GerakanControllerView::class, 'index');
+Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');
 Router::add('GET', '/company', CompanyController::class, 'bestCompany');
