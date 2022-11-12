@@ -5,13 +5,30 @@ use LearnPhpMvc\APP\View;
 
 class HomeController  
 {
-    function index(){
+    public function index(){
         $model=[
             'title'=>"MMA GYM",
             'content'=>"Login"
         ];
 
-        View::render("/home/dashboard" , $model);
+        View::render("/admin/dashboard" , $model);
+        // View::redirect("");
+    }
+
+    function turnPage($page,$model = array('title'=>"AMM GYM")){
+
+        View::render("/admin/dashboard" , $model);
+        // View::redirect("");
+    }
+
+    public function landing()
+    {
+        $model=[
+            'title'=>"MMA GYM",
+            'content'=>"Login"
+        ];
+
+        View::renderWithoutNavbar("/landing-page" , $model);
         // View::redirect("");
     }
 }

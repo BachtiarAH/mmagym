@@ -2,6 +2,8 @@
 
 namespace LearnPhpMvc\APP;
 
+use LearnPhpMvc\Config\Url;
+
 class View
 {
     public static function render(string $view, $model)
@@ -17,10 +19,16 @@ class View
     }
     public static function redirect(string $url)
     {
-        header("location:$url");
+        $baseUrl = Url::BaseUrl();
+        header("location: "."$baseUrl"."$url");
         if(getenv('mode') != 'test'){
             exit();
         }
+    }
+
+    public static function getUrl($url)
+    {
+        return Url::BaseUrl().$url;
     }
     
     public static function renderWithoutNavbar(string $view, $model)
@@ -31,5 +39,15 @@ class View
         require __DIR__ . '/../view/' . $view. '.php';
         require __DIR__ . '../../view/componen/' .'script.php';
         require __DIR__ . '/../view/componen/' . 'footer.php';
+    }
+
+    public static function renderOnly(string $view, $model)
+    {
+        // require __DIR__ . '../../view/componen/' .'header.php';
+        // require __DIR__ . '../../view/componen/' .'style.php';
+        // require __DIR__ . '../../view/template/' .'navbar.php';
+        require __DIR__ . '/../view/' . $view. '.php';
+        // require __DIR__ . '../../view/componen/' .'script.php';
+        // require __DIR__ . '/../view/componen/' . 'footer.php';
     }
 }

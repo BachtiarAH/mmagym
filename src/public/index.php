@@ -16,6 +16,7 @@ use LearnPhpMvc\controller\CompanyController;
 use LearnPhpMvc\controller\HomeController;
 use LearnPhpMvc\controller\ProductController;
 use LearnPhpMvc\controller\LamarController;
+use LearnPhpMvc\controller\LandingPageController;
 use LearnPhpMvc\controller\LoginController;
 
 //api
@@ -57,12 +58,11 @@ Router::add('POST','/api/riwayat/user',RiwayatController::class,'findRiwayatGera
 
 //w=web
 
-// Router::add('GET', '/', HomeController::class, 'index');
-// Router::add('GET', '/hello', HomeController::class, 'hello', [AuthMiddleware::class]);
-// Router::add('GET', '/world', HomeController::class, 'world', [AuthMiddleware::class]);
-// Router::add('GET', '/about', HomeController::class, 'about');
-Router::add('GET', '/login', LoginController::class, 'index');
-Router::add('GET', '/', HomeController::class, 'index');
+Router::add('GET', '/admin/login', LoginController::class, 'index');
+Router::add('GET', '/admin', HomeController::class, 'index');
+Router::add('GET', '/', LandingPageController::class, 'index');
+Router::add('POST', '/submit/login', LoginController::class, 'login');
+
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');
 Router::add('GET', '/company', CompanyController::class, 'bestCompany');

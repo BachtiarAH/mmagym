@@ -15,4 +15,13 @@ class LoginController
         View::renderWithoutNavbar("/login/login" , $model);
         // View::redirect("");
     }
+
+    public function login()
+    {
+        echo "redirectiing";
+        View::redirect('/admin');
+        // header('http://localhost/mmagym/src/public/admin');
+        // $hompage = new HomeController();
+        // $hompage->index();
+    }
 }

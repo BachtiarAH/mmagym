@@ -20,8 +20,18 @@
 <!-- iconify -->
 <script src="https://code.iconify.design/iconify-icon/1.0.1/iconify-icon.min.js"></script>
 
+<!-- Plugins -->
+<script src="template-landingpage/assets/js/owl-carousel.js"></script>
+<script src="template-landingpage/assets/js/scrollreveal.min.js"></script>
+<script src="template-landingpage/assets/js/waypoints.min.js"></script>
+<script src="template-landingpage/assets/js/jquery.counterup.min.js"></script>
+<script src="template-landingpage/assets/js/imgfix.min.js"></script>
+
+<!-- Global Init -->
+<script src="template-landingpage/assets/js/custom.js"></script>
+
+
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="AdminLTE-3.2.0/dist/js/demo.js"></script> -->
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- <script src="AdminLTE-3.2.0/dist/js/pages/dashboard2.js"></script> -->
-

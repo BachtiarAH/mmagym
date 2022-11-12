@@ -1,6 +1,11 @@
+<?php
 
+// use LearnPhpMvc\APP\View;
 
+use LearnPhpMvc\APP\View;
+use LearnPhpMvc\Config\Url;
 
+?>
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
@@ -53,7 +58,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="pages/charts/chartjs.html" class="nav-link">
+                                <a href="<?=View::getUrl("/login")?>" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Alat</p>
                                 </a>
