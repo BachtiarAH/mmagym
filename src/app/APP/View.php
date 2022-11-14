@@ -3,11 +3,19 @@
 namespace LearnPhpMvc\APP;
 
 use LearnPhpMvc\Config\Url;
+// use LearnPhpMvc\Exeptions\RestClient;
+use RestClient as GlobalRestClient;
+
+// use LearnPhpMvc\Exeptions\RestClientException;
 
 class View
 {
     public static function render(string $view, $model)
     {
+        $api = new GlobalRestClient([
+            'base_url' => Url::BaseUrl(), 
+        ]);
+        
         require __DIR__ . '../../view/componen/' .'header.php';
         require __DIR__ . '../../view/componen/' .'style.php';
         require __DIR__ . '../../view/componen/' . 'bodyStart.php';

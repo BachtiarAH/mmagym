@@ -13,4 +13,7 @@ use LearnPhpMvc\Config\Url;
 <link rel="stylesheet" href="<?=Url::BaseUrl()?>AdminLTE-3.2.0/dist/css/adminlte.min.css">
 <!-- overlayScrollbars -->
 <link rel="stylesheet" href="<?=Url::BaseUrl()?>AdminLTE-3.2.0/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<!-- css local -->
+<link rel="stylesheet" href="<?=Url::BaseUrl()?>css/style-menu-latihan.css">
+<link rel="stylesheet" href="<?=Url::BaseUrl()?>css/style-user.css">
 

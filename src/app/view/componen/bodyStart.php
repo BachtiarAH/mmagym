@@ -11,3 +11,5 @@ use LearnPhpMvc\Config\Url;
 <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__wobble" src="<?=Url::BaseUrl()?>assets\logo-amm-gym.png" alt="AdminLTELogo" >
 </div> -->
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">

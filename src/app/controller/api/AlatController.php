@@ -53,6 +53,13 @@ class AlatController
         echo json_encode($this->service->editData($data));
     }
 
+    public function editNameData()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->edtNameData($data));
+    }
+
     public function deleteData()
     {
         $json = file_get_contents('php://input');

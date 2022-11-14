@@ -41,6 +41,16 @@ class AlatService extends Service
             return $this->FailResponse("format");
         }
     }
+
+    public function edtNameData($data)
+    {
+        if (isset($data->nama)&&isset($data->id)) {
+            return $this->repo->editNameData($data->id,$data->nama,);
+        } else {
+            return $this->FailResponse("format");
+        }
+        
+    }
     
     public function deleteData($data)
     {

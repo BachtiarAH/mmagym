@@ -20,7 +20,8 @@
     ],
     "require": {
         "php" :">8",
-        "almasaeed2010/adminlte": "~3.2"
+        "almasaeed2010/adminlte": "~3.2",
+        "tcdent/php-restclient": "0.1.8.1"
 
     },
     "require-dev": {

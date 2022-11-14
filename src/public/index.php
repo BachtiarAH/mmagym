@@ -41,6 +41,7 @@ Router::add('POST','/api/alat/findByName',AlatController::class,'findByName');
 Router::add('POST','/api/alat/add',AlatController::class,'addData');
 Router::add('POST','/api/alat/edit',AlatController::class,'editData');
 Router::add('POST','/api/alat/delet',AlatController::class,'deleteData');
+Router::add('POST','/api/alat/edit/nama',AlatController::class, 'editNameData');
 
 //api gerakan
 Router::add('POST','/api/gerakan/add',GerakanController::class,'addData');

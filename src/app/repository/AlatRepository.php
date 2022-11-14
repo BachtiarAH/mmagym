@@ -23,7 +23,8 @@ class AlatRepository{
             while ($row=$result->fetch(\PDO::FETCH_ASSOC)) {
                 $item = array(
                     'id'=>$row['id_alat'],
-                    'nama'=>$row['nama_alat']
+                    'nama'=>$row['nama_alat'],
+                    'gambar'=>$row['gambar']
                 );
                 array_push($respos['body'],$item);
             }
@@ -51,7 +52,8 @@ class AlatRepository{
             while ($row=$result->fetch(\PDO::FETCH_ASSOC)) {
                 $item = array(
                     'id'=>$row['id_alat'],
-                    'nama'=>$row['nama_alat']
+                    'nama'=>$row['nama_alat'],
+                    'gambar'=>$row['gambar']
                 );
                 array_push($respons['body'],$item);
             }
@@ -92,6 +94,26 @@ class AlatRepository{
         // $respons['respons_code'] = "";
         try {
             $sql = "UPDATE `alat` SET `nama_alat`='$nama',`gambar`='$gambar' WHERE id_alat = $id";
+            $stmt = $this->connecetion->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+    public function editNameData($id,$nama)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "UPDATE `alat` SET `nama_alat` = '$nama' WHERE `alat`.`id_alat` = $id;";
             $stmt = $this->connecetion->prepare($sql);
             $stmt->execute();
             $respons['status'] = 'succes';
