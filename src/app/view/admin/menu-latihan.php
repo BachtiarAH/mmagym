@@ -1,3 +1,43 @@
+<?php
+$result = $api->get("/api/alat/findAll", ['q' => "#php"]);
+// var_dump($result->response);
+$dataJson = $result->response;
+
+function JsonToTabel($json)
+{
+    $html = '';
+    $object = json_decode($json);
+    if (isset($object->body)) {
+        $data = $object->body;
+        if (isset($data[0]->id) && isset($data[0]->nama)) {
+            for ($i = 0; $i < count($data); $i++) {
+                $id = $data[$i]->id;
+                $nama = $data[$i]->nama;
+                $gambar = $data[$i]->gambar;
+
+                $html .= "
+                <tr >
+                    <td class='id' onclick='tbClicked()'> $id </td>
+                    <td class='data-nama' onchange='tes()' contenteditable='true' onclick='tbClicked()'> $nama</td>
+                    <td class='data-gambar' onchange='tes()' onclick='tbClicked()'> $gambar</td>
+                    <td><i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td>
+                </tr>
+                ";
+            }
+        }
+    }
+
+    return $html;
+}
+
+
+$dataHtml = JsonToTabel($dataJson);
+// var_dump($dataHtml);
+
+?>
+
+?>
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">

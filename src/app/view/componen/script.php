@@ -37,6 +37,10 @@ use LearnPhpMvc\Config\Url;
 <script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
+<!-- jsGrid -->
+<script src="<?=Url::BaseUrl()?>AdminLTE-3.2.0/plugins/jsgrid/demos/db.js"></script>
+<script src="<?=Url::BaseUrl()?>AdminLTE-3.2.0/plugins/jsgrid/jsgrid.min.js"></script>
+
 
 <!-- ChartJS -->
 <script src="AdminLTE-3.2.0/plugins/chart.js/Chart.min.js"></script>
@@ -241,4 +245,5 @@ use LearnPhpMvc\Config\Url;
     // }
 </script>
 
-<script src="<?=Url::BaseUrl()?>/js/user.js"></script>
+<script src="<?=Url::BaseUrl()?>js/user.js"></script>
+<script src="<?=Url::BaseUrl()?>js/menulatihan.js"></script>
