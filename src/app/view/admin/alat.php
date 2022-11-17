@@ -18,8 +18,8 @@ function JsonToTabel($json)
                 $html .= "
                 <tr >
                     <td class='id' onclick='tbClicked()'> $id </td>
-                    <td class='data-nama' onchange='tes()' contenteditable='false' onclick='tbClicked()'> $nama</td>
-                    <td class='data-gambar' onchange='tes()' contenteditable='true' onclick='tbClicked()'> $gambar</td>
+                    <td class='data-nama' onchange='tes()' contenteditable='true' onclick='tbClicked()'> $nama</td>
+                    <td class='data-gambar' onchange='tes()' onclick='tbClicked()'> $gambar</td>
                     <td><i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td>
                 </tr>
                 ";
@@ -55,79 +55,78 @@ $dataHtml = JsonToTabel($dataJson);
     </div><!-- /.container-fluid -->
 </div>
 
-<div class="row">
-    <div class="col-sm-8">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Data Alat</h3>
 
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
+<section class="content">
+    <div class="row ">
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with default features</h3>
                         </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="table-alat" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>nama</th>
+                                        <th>gambar</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php echo $dataHtml;?>
+                                </tbody>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>nama</th>
+                                        <th>gambar</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot> -->
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 500px;">
-                        <table class="table table-head-fixed text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Gambar</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php echo $dataHtml; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">edit / add</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-
-            <div class="card-body">
-                <div class="form-group" id="alatId" hidden>
-                    <label for="form-id">id</label>
-                    <input type="text" value="" class="form-control" id="form-id" placeholder="">
+        <div class="col-sm-4">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">edit / add</h3>
                 </div>
-                <div class="form-group">
-                    <label for="form-name">Nama</label>
-                    <input type="text" value="" class="form-control" id="form-name" placeholder="">
-                </div>
-                <label for="form-gambar">Gambar</label>
-                <div class="custom-file form-group">
-                    <input type="file" class="custom-file-input" id="upload-file-alat" onchange="changeLabelGambarALat()">
-                    <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
-                </div>
-            </div>
-            <!-- /.card-body -->
+                <!-- /.card-header -->
+                <!-- form start -->
 
-            <div class="card-footer">
-                <button type="submit" class="btn btn-primary" onclick="submitAlat()">Submit</button>
-            </div>
+                <div class="card-body">
+                    <div class="form-group" id="alatId" hidden>
+                        <label for="form-id">id</label>
+                        <input type="text" value="" class="form-control" id="form-id" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-name">Nama</label>
+                        <input type="text" value="" class="form-control" id="form-name" placeholder="">
+                    </div>
+                    <label for="form-gambar">Gambar</label>
+                    <div class="custom-file form-group">
+                        <input type="file" class="custom-file-input" id="upload-file-alat" onchange="changeLabelGambarALat()">
+                        <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
+                    </div>
+                </div>
+                <!-- /.card-body -->
 
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" onclick="submitAlat()">Submit</button>
+                </div>
+
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
+</section>
 <!-- /.content-header -->

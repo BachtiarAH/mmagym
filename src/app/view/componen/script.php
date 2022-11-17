@@ -1,3 +1,9 @@
+<?php
+
+use LearnPhpMvc\APP\View;
+use LearnPhpMvc\Config\Url;
+
+?>
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="AdminLTE-3.2.0/plugins/jquery/jquery.min.js"></script>
@@ -7,6 +13,8 @@
 <script src="AdminLTE-3.2.0/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="AdminLTE-3.2.0/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="AdminLTE-3.2.0/dist/js/demo.js"></script>
 
 <!-- PAGE PLUGINS -->
 <!-- jQuery Mapael -->
@@ -14,6 +22,22 @@
 <script src="AdminLTE-3.2.0/plugins/raphael/raphael.min.js"></script>
 <script src="AdminLTE-3.2.0/plugins/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="AdminLTE-3.2.0/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="AdminLTE-3.2.0/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/jszip/jszip.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+
 <!-- ChartJS -->
 <script src="AdminLTE-3.2.0/plugins/chart.js/Chart.min.js"></script>
 
@@ -23,6 +47,33 @@
 <script src="https://kit.fontawesome.com/5c43977293.js" crossorigin="anonymous"></script>
 
 <script>
+    $(function() {
+        $("#table-alat").DataTable({
+            "fixedHeader": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columnDefs": [{
+                    "searchable": false,
+                    "targets": 0
+                },
+                {
+                    "searchable": true,
+                    "targets": 1
+                },
+                {
+                    "searchable": false,
+                    "targets": 2
+                },
+                {
+                    "searchable": false,
+                    "targets": 3
+                }
+            ]
+        }).buttons().container().appendTo(' .col-md-6:eq(0)');
+    });
+
     xhttp = new XMLHttpRequest();
     baseUrl = "http://localhost/mmagym/src/public/";
 
@@ -101,8 +152,8 @@
                 })
                 console.log(json);
                 alatIsEdit = false;
-                xhttp.open("POST",baseUrl+"api/alat/edit", true);
-                xhttp.setRequestHeader('Conten-Type','aplication/json');
+                xhttp.open("POST", baseUrl + "api/alat/edit", true);
+                xhttp.setRequestHeader('Conten-Type', 'aplication/json');
                 xhttp.send(json);
                 console.log(xhttp.responseText);
             } else {
@@ -111,26 +162,28 @@
                     "nama": formNama.value
                 })
                 console.log(json);
-                xhttp.open("POST",baseUrl+"api/alat/edit/nama", true);
-                xhttp.setRequestHeader('Conten-Type','aplication/json');
+                xhttp.open("POST", baseUrl + "api/alat/edit/nama", true);
+                xhttp.setRequestHeader('Conten-Type', 'aplication/json');
                 xhttp.send(json);
                 console.log(xhttp.responseText);
             }
         } else {
-            if (formGamabr.value&& formNama.value) {
+            if (formGamabr.value && formNama.value) {
                 var json = JSON.stringify({
                     "nama": formNama.value,
                     "gambar": Gambar
                 })
                 console.log(json);
-                xhttp.open("POST",baseUrl+"api/alat/add", true);
-                xhttp.setRequestHeader('Conten-Type','aplication/json');
+                xhttp.open("POST", baseUrl + "api/alat/add", true);
+                xhttp.setRequestHeader('Conten-Type', 'aplication/json');
                 xhttp.send(json);
                 console.log(xhttp.responseText);
             } else {
                 alert("tolong isi semua form");
             }
         }
+
+        window.location.replace("http://localhost/mmagym/src/public/alat");
 
     }
 
@@ -148,7 +201,44 @@
         var tr = event.target.parentNode.parentNode;
         var id = tr.childNodes[1];
         tr.style.visibility = "collapse";
-
+        var json = JSON.stringify({
+            "id": id.innerHTML
+        });
+        xhttp.open("POST", baseUrl + "/api/alat/delet", true);
+        xhttp.setRequestHeader('Conten-Type', 'aplication/json');
+        xhttp.send(json);
+        console.log(xhttp.responseText);
         console.log(id.innerHTML);
+
     }
+
+
+
+    // function searchAlat(searchBar) {
+    //     tabel = document.getElementById('tableAlat');
+    //     console.log(searchBar.value);
+    //     var json = JSON.stringify({
+    //         "name": searchBar.value
+    //     });
+    //     xhttp.open("POST", baseUrl + "/api/alat/findByName", true);
+    //     xhttp.setRequestHeader('Conten-Type', 'aplication/json');
+    //     xhttp.send(json);
+    //     console.log(xhttp.responseText);
+    //     // console.log(id.innerHTML);
+    //     xhttp.onload = function() {
+    //         request = this.responseText;
+    //         data = JSON.parse(request);
+    //         tableHTML = "";
+    //         console.log(data.body);
+    //         for (let index = 0; index < data.body.length; index++) {
+    //             // const element = data.body[index];
+    //             // console.table([data.body[index].id,data.body[index].nama,data.body[index].gambar]);
+    //             tableHTML += "<tr >'<td class='id' onclick='tbClicked()'> " + data.body[index].id + " </td><td class='data-nama' onchange='tes()' contenteditable='false' onclick='tbClicked()'> " + data.body[index].nama + "</td><td class='data-gambar' onchange='tes()' contenteditable='true' onclick='tbClicked()'> " + data.body[index].gambar + "</td><td><i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td></tr>";
+    //         }
+    //         // console.table([data.body.id,data.body.name]);
+    //         tabel.innerHTML = tableHTML;
+    //     }
+    // }
 </script>
+
+<script src="<?=Url::BaseUrl()?>/js/user.js"></script>

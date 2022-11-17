@@ -5,7 +5,7 @@ use LearnPhpMvc\APP\View;
 if (isset($_POST['submit'])) {
     header(View::getUrl('/admin'));
 }else {
-    echo "dancok";
+    echo "";
 }
 ?>
 
