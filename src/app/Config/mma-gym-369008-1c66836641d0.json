@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "mma-gym-369008",
+  "private_key_id": "1c66836641d0214cc5b269821276e4a351cb3762",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDfR1U8qkxJTf9X\nKLowV7t0Tc24WCEGJez+FpEyBXJbjTc9EDkbxc7WD2zvTWRGo5lLuOAGfcuBGiOl\nE13kpDBdD/2b/SZdF7KyFDN7uZng/XpLorTwlTqdLt7gMOxAC6henRAq8+RmHvs7\n4O/M3zBtO18poW25HW1qSg3rgwqNEtwT/C4ES/2uZH8V2IOqQJMTjV0lpM00g6rY\nTPsw5KQiC4PtEcUsxzTwlAEZ2zV7mvMC0mFpkq16E2T3f08cHc/iqP2CD/gvYGkb\nPMB99/zY16LxeSQ0e6e9019D5MJsd2eW+VD+gXX2+FRCgRSBmrE8+TgNgyRO35at\nvAPEOLOTAgMBAAECggEAND3WfblC3Cv5wITw+3qri4zgw28rWuroxpK1KkUH+s/R\nyuHO2uavfHpjfKJZAgYpSgRZtmscgHqDOI6Ne3/HKR8isarLnSB8WRpM6XgFvxTP\n1n6dY2UnL7vVvhL0VA/mNyz8qXAjUpmRIvOAaCkYhZZMr8rrh1KRVTs6go5Im7UM\nE4OtGx04ErIqyopsLQ2ZBTXN7URHmFp3ScGMh7hkjQWWW+IlMKtTV4S1KJbTQNkR\nNOk7fIZobyEivuY+4Y5aimL4PfBH79wWRyggS3TsakHmRYibDlBVWqxdll3GEFCO\nP5iasGwbOYDiZ1hoqyv72YECeDztFzWGZOgpA2270QKBgQDwxa7/LzsaRq6Kkefy\nAmOb7fl5kxhkPhPU3Re7VdUdPirJ/hkIGOS4QZCFrQvDcA+XLkmul0pLK1blzL4F\n7CFuHuR779Ceq9TMRVwGfsJqjQOkAQkrdnvjo2PwtiHPdohh+bgyri/tJgTAdFNF\nGVcFA8tFIAZwUXXdbZL5lpxPBwKBgQDtZmnBGZwjNuyW6WyzUknqT8TJPk1sH8XB\nAj1CGuL69opbamfPBx8FzTsIEyiqci3u2JmnZ/iiDnfQ3xO6pkP31vmV4/oic541\nX3h+GjwVqmIHB22obJrVhBXgO+Z3/AATInc0iMR33FXpetuSHEqiWTgqqvwQLVEw\nT8cKuCIIFQKBgQCqxGqzzznqDwuoeIe72/nuFEEG+08neefy58T3N49pqDgM/82d\nMpq2HLp2NR/Mw+Qq48earu8glWKSpj54UNv9EKgZRyP+Bf1tzBvS94DIta9JWPq5\n+tUvxSkTBvq//GAKrWT5fRW862QfY+HTdn+DrQc0xdwLOZuRKzA9GZdPbQKBgQCK\npJ7qeQxovHDbiaND7rDgOInShaItnTieibJA4vbgXg9bZ/8MNzp05vCsvJOpR1lv\n/etuixf3fL+Yqk8ZWHSlT1Ufpq60ZBVnUkRKUQP6GzF4rWvrStH6FFO6SwFD3VYl\n1qELezxSS8mYu3l0ETW9LqHQuV7QC8c4kb7KkdK+KQKBgEmY3GJjbl16uHWnDEG3\n9qX4P8tSOSMK88pxSjRDuAbe4qvUbcFpYqakIxgLyXienPZ3ti55F7XnhL3NRa6c\n7ZEmESiFgPKyVHFfQhLHdWWCAqHhdBocOvebgJsMmHwumpFtS8fVF4lK5tPu3Wzg\n3FHdt8cQRcUfo4LIxnAdInAb\n-----END PRIVATE KEY-----\n",
+  "client_email": "mmagymadmin@mma-gym-369008.iam.gserviceaccount.com",
+  "client_id": "104005362211981774777",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mmagymadmin%40mma-gym-369008.iam.gserviceaccount.com"
+}

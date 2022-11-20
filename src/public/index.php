@@ -11,6 +11,7 @@ use LearnPhpMvc\controller\api\JadwalController;
 use LearnPhpMvc\controller\api\MenuLatihanController;
 use LearnPhpMvc\controller\api\PencariMagang;
 use LearnPhpMvc\controller\api\RiwayatController;
+use LearnPhpMvc\controller\api\TesController;
 // use LearnPhpMvc\controller\api\userContrller;
 use LearnPhpMvc\controller\api\userController;
 use LearnPhpMvc\controller\CompanyController;
@@ -25,6 +26,11 @@ use LearnPhpMvc\controller\UsersController;
 use LearnPhpMvc\controller\UsersControllerView;
 
 //api
+
+//tes
+Router::add('POST','/api/tes/drive/delete',TesController::class,'deleteGoogleDriveFile');
+Router::add('POST','/api/tes/drive/replace',TesController::class,'replaceGoogleDrifeFile');
+Router::add('POST','/api/tes/drive/create',TesController::class,'createGDriveFile');
 
 //api user
 Router::add('GET','/api/user/all',UserController::class,'findALl');
@@ -42,6 +48,8 @@ Router::add('POST','/api/alat/add',AlatController::class,'addData');
 Router::add('POST','/api/alat/edit',AlatController::class,'editData');
 Router::add('POST','/api/alat/delet',AlatController::class,'deleteData');
 Router::add('POST','/api/alat/edit/nama',AlatController::class, 'editNameData');
+Router::add('POST','/api/alat/tesfile',AlatController::class, 'tesFile');
+Router::add('POST','/api/alat/tesUpload',AlatController::class, 'uploadBasic');
 
 //api gerakan
 Router::add('POST','/api/gerakan/add',GerakanController::class,'addData');

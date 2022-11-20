@@ -1,4 +1,8 @@
 <?php
+
+use LearnPhpMvc\APP\View;
+use LearnPhpMvc\Config\Url;
+
 $result = $api->get("/api/alat/findAll", ['q' => "#php"]);
 // var_dump($result->response);
 $dataJson = $result->response;
@@ -102,7 +106,7 @@ $dataHtml = JsonToTabel($dataJson);
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-
+                <form action="<?=Url::BaseUrl().'/api/alat/add'?>" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="form-group" id="alatId" hidden>
                         <label for="form-id">id</label>
@@ -114,16 +118,17 @@ $dataHtml = JsonToTabel($dataJson);
                     </div>
                     <label for="form-gambar">Gambar</label>
                     <div class="custom-file form-group">
-                        <input type="file" class="custom-file-input" id="upload-file-alat" onchange="changeLabelGambarALat()">
+                        <input type="file" class="custom-file-input" name="gambar-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
                         <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
                     </div>
                 </div>
+                
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary" onclick="submitAlat()">Submit</button>
+                    <button type="submit" class="btn btn-primary" onclick="">Submit</button>
                 </div>
-
+                </form>
             </div>
         </div>
 

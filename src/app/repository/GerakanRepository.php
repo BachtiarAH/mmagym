@@ -16,7 +16,9 @@ class GerakanRepository
         $respons = array();
         $respons['status'] = '';
         $respons['body'] = array();
-        $sql = "SELECT * FROM `gerakan`";
+        $sql = "SELECT `id_gerakan`, `nama_gerakan`, `video`, gerakan.gambar, alat.nama_alat FROM `gerakan` 
+        JOIN alat ON alat.id_alat = gerakan.id_alat
+        WHERE 1";
         $result = $this->connection->query($sql);
 
         if ($result->rowCount() > 0) {
@@ -24,10 +26,10 @@ class GerakanRepository
             while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
                 $item = array(
                     'id' => $row['id_gerakan'],
-                    'nama' => $row['nama_gerakan'],
+                    'gerakan' => $row['nama_gerakan'],
                     'video' => $row['video'],
                     'gambar' => $row['gambar'],
-                    'id_alat' => $row['id_alat'],
+                    'alat' => $row['nama_alat'],
                 );
                 array_push($respons['body'], $item);
             }
@@ -68,7 +70,7 @@ class GerakanRepository
     public function findById($id)
     {
         $respons = array();
-        $respons['status']='';
+        $respons['status'] = '';
         $respons['body'] = array();
         $sql = "SELECT * FROM `gerakan` WHERE gerakan.id_gerakan = $id";
         $result = $this->connection->query($sql);
@@ -87,7 +89,7 @@ class GerakanRepository
             }
         } else {
             $respons['status'] = "fail";
-            $respons['massage']= 'not found';
+            $respons['massage'] = 'not found';
         }
 
         return $respons;
@@ -96,7 +98,7 @@ class GerakanRepository
     public function findByName($name)
     {
         $respons = array();
-        $respons['status']='';
+        $respons['status'] = '';
         $respons['body'] = array();
         $sql = "SELECT * FROM `gerakan` WHERE gerakan.nama_gerakan LIKE '%$name%'";
         $result = $this->connection->query($sql);
@@ -115,7 +117,7 @@ class GerakanRepository
             }
         } else {
             $respons['status'] = "fail";
-            $respons['massage']= 'not found';
+            $respons['massage'] = 'not found';
         }
 
         return $respons;
@@ -124,7 +126,7 @@ class GerakanRepository
     public function findByAlat($id_alat)
     {
         $respons = array();
-        $respons['status']='';
+        $respons['status'] = '';
         $respons['body'] = array();
         $sql = "SELECT * FROM `gerakan` WHERE id_alat = $id_alat";
         $result = $this->connection->query($sql);
@@ -143,13 +145,13 @@ class GerakanRepository
             }
         } else {
             $respons['status'] = "fail";
-            $respons['massage']= 'not found';
+            $respons['massage'] = 'not found';
         }
 
         return $respons;
     }
 
-    public function editData($id,$nama,$video,$gambar,$id_alat)
+    public function editData($id, $nama, $video, $gambar, $id_alat)
     {
         $respons = array();
         $respons['status'] = '';

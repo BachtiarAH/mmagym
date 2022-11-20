@@ -21,7 +21,8 @@
     "require": {
         "php" :">8",
         "almasaeed2010/adminlte": "~3.2",
-        "tcdent/php-restclient": "0.1.8.1"
+        "tcdent/php-restclient": "0.1.8.1",
+        "google/apiclient": "^2.12.1"
 
     },
     "require-dev": {

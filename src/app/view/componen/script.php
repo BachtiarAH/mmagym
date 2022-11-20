@@ -187,7 +187,7 @@ use LearnPhpMvc\Config\Url;
             }
         }
 
-        window.location.replace("http://localhost/mmagym/src/public/alat");
+        // window.location.replace("http://localhost/mmagym/src/public/alat");
 
     }
 
@@ -247,3 +247,4 @@ use LearnPhpMvc\Config\Url;
 
 <script src="<?=Url::BaseUrl()?>js/user.js"></script>
 <script src="<?=Url::BaseUrl()?>js/menulatihan.js"></script>
+<script src="<?=Url::BaseUrl()?>js/gerakan.js"></script>

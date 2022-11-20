@@ -2,7 +2,18 @@
 
 namespace LearnPhpMvc\controller\api;
 
+use Exception;
+use Google\Client;
+use Google\Service;
+use Google\Service\Drive as ServiceDrive;
+use Google\Service\Drive\Drive;
+use Google\Service\Drive\DriveFile;
+use Google\Service\DriveActivity\Drive as DriveActivityDrive;
+use Google_Client;
+use Google_Service;
 use LearnPhpMvc\Config\Database;
+use LearnPhpMvc\config\GoogleClient;
+use LearnPhpMvc\Config\Url;
 use LearnPhpMvc\repository\AlatRepository;
 // use LearnPhpMvc\repository\userRepository;
 use LearnPhpMvc\Service\AlatService;
@@ -39,9 +50,20 @@ class AlatController
         echo $data;
     }
 
+    public function tesFile()
+    {
+        $body = file_get_contents('php://input');
+        var_dump($body);
+        var_dump($_FILES);
+    }
+
     public function addData()
     {
+
+
         $json = file_get_contents('php://input');
+        $filepath = $_FILES['gambar-alat'];
+        var_dump($filepath);
         $data = json_decode($json);
         echo json_encode($this->service->addData($data));
     }
