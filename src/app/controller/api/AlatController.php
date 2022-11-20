@@ -59,13 +59,11 @@ class AlatController
 
     public function addData()
     {
-
-
-        $json = file_get_contents('php://input');
-        $filepath = $_FILES['gambar-alat'];
-        var_dump($filepath);
-        $data = json_decode($json);
-        echo json_encode($this->service->addData($data));
+        // $json = file_get_contents('php://input');
+        // $filepath = $_FILES['gambar-alat'];
+        // var_dump($filepath);
+        // $data = json_decode($json);
+        echo json_encode($this->service->addData($_FILES,$_POST));
     }
 
     public function editData()

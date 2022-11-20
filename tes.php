@@ -1,74 +1,26 @@
 <?php
-class AlatModel
+use Google\Client;
+use Google\Service\Drive;
+# TODO - PHP client currently chokes on fetching start page token
+function uploadBasic()
 {
-    private $id;
-    private $name;
+    try {
+        $client = new Client();
+        $client->useApplicationDefaultCredentials();
+        $client->addScope(Drive::DRIVE);
+        $driveService = new Drive($client);
+        $fileMetadata = new Drive\DriveFile(array(
+        'name' => 'photo.jpg'));
+        $content = file_get_contents('../files/photo.jpg');
+        $file = $driveService->files->create($fileMetadata, array(
+            'data' => $content,
+            'mimeType' => 'image/jpeg',
+            'uploadType' => 'multipart',
+            'fields' => 'id'));
+        printf("File ID: %s\n", $file->id);
+        return $file->id;
+    } catch(Exception $e) {
+        echo "Error Message: ".$e;
+    } 
 
-
-
-    /**
-     * Get the value of id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of name
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 }
-
-
-$model = new AlatModel();
-$model->setId("1");
-$model->setName("press");
-// var_dump($model);
-
-$json = json_encode($model);
-
-// $myArray = ["1"=>1,"2"=>2];
-$myArray = json_decode(json_encode ( $model ) , true);;
-
-// var_dump($json);
-// echo "<br>";
-
-// var_dump($myArray);
-
-// printf($myArray['AlatModelid']);
-
-$txt = "PHP";
-// echo "I love $txt!";
-
-$json = file_get_contents('tes.json');
-$data = json_decode($json);
-// var_dump($data);
-echo $data->body[0]->nama;
