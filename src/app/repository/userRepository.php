@@ -141,6 +141,38 @@ class userRepository
         return $respons;
     }
 
+    public function findByEmail($email) 
+    {
+        $respons = array();
+        $respons['status'] = "";
+        $respons['respons_code'] = "";
+        $respons['body'] = array();
+        $sql = "SELECT * FROM `usermma` WHERE email = '$email'";
+        $result = $this->connection->query($sql);
+
+        if ($result->rowCount() > 0) {
+            $respons['message'] = "oke";
+            $respons['respons_code'] = 200;
+            while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
+                $item = array(
+                    'id' => $row['id'],
+                    'nama' => $row['nama'],
+                    'password' => $row['password'],
+                    'email' => $row['email'],
+                    'alamat' => $row['Alamat'],
+                    'akses' => $row['akses']
+                );
+                array_push($respons['body'], $item);
+            }
+        } else {
+            $respons['status'] = "not found";
+            $respons['respons_code'] = 404;
+            $respons['message'] = "Data tidak ditemukan";
+        }
+
+        return $respons;
+    }
+
     public function addData($nama, $email, $password, $alamat, $akases)
     {
         $respons = array();

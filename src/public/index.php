@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use LearnPhpMvc\APP\Router;
 use LearnPhpMvc\controller\AlatControllerView;
 use LearnPhpMvc\controller\api\AlatController;
+use LearnPhpMvc\controller\api\AuthController;
 use LearnPhpMvc\controller\api\CompanyControllerApi;
 use LearnPhpMvc\controller\api\GerakanController;
 use LearnPhpMvc\controller\api\JadwalController;
@@ -26,6 +27,9 @@ use LearnPhpMvc\controller\UsersController;
 use LearnPhpMvc\controller\UsersControllerView;
 
 //api
+
+//auth
+Router::add('POST','/api/auth/login',AuthController::class,'login');
 
 //tes
 Router::add('POST','/api/tes/drive/delete',TesController::class,'deleteGoogleDriveFile');
