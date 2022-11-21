@@ -141,7 +141,7 @@ class userRepository
         return $respons;
     }
 
-    public function findByEmail($email) 
+    public function findByEmail($email)
     {
         $respons = array();
         $respons['status'] = "";
@@ -200,7 +200,7 @@ class userRepository
         return $respons;
     }
 
-    public function EditData($id,$nama, $email, $password, $alamat, $akases)
+    public function EditData($id, $nama, $email, $password, $alamat, $akases)
     {
         $respons = array();
         $respons['status'] = '';
@@ -214,6 +214,46 @@ class userRepository
                     `Alamat` = '$alamat',
                     `akses` = '$akases' 
                     WHERE `usermma`.`id` = $id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+    public function editAkses($email,$akses)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "UPDATE `usermma` SET `akses`='$akses' WHERE email = '$email'";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+    public function editPassword($email,$password)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "UPDATE `usermma` SET `password`='$password' WHERE email='$email'";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute();
             $respons['status'] = 'succes';

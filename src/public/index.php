@@ -30,6 +30,12 @@ use LearnPhpMvc\controller\UsersControllerView;
 
 //auth
 Router::add('POST','/api/auth/login',AuthController::class,'login');
+Router::add('POST','/api/auth/register',AuthController::class,'register');
+Router::add('POST','/api/auth/register/verif',AuthController::class,'verifyOtp');
+Router::add('POST','/api/auth/resetpassword/sendOtp',AuthController::class,'sendOtpResetPassword');
+Router::add('POST','/api/auth/sendOtp',AuthController::class,'sendOtpAgain');
+Router::add('POST','/api/auth/resetpassword/setpassword',AuthController::class,'resetPassword');
+Router::add('POST','/api/auth/cekotp',AuthController::class,'cekOtp');
 
 //tes
 Router::add('POST','/api/tes/drive/delete',TesController::class,'deleteGoogleDriveFile');
