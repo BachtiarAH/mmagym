@@ -20,11 +20,18 @@ function JsonToTabel($json)
                 $gambar = $data[$i]->gambar;
 
                 $html .= "
-                <tr >
+                <tr>
                     <td class='id' onclick='tbClicked()'> $id </td>
-                    <td class='data-nama' onchange='tes()' contenteditable='true' onclick='tbClicked()'> $nama</td>
-                    <td class='data-gambar' onchange='tes()' onclick='tbClicked()'> $gambar</td>
-                    <td><i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td>
+                    <td class='data-nama'  > $nama</td>
+                    <td class='data-gambar' '> <img src='https://drive.google.com/uc?export=view&id=$gambar' alt='$gambar' srcset=''></td>
+                    <td>
+                        <div class='row'>
+                            <a href='".url::BaseUrl()."/alat/delete?id=$id'>
+                                <i class='fa-solid fa-trash col' data-id='$id'></i>
+                            </a>
+                            <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat'  data-gambar='$gambar' data-id='$id' data-nama='$nama' onclick='setModelForm(this)'></i>
+                        </div>
+                    </td>
                 </tr>
                 ";
             }
@@ -39,6 +46,8 @@ $dataHtml = JsonToTabel($dataJson);
 // var_dump($dataHtml);
 
 ?>
+
+
 
 
 
@@ -67,7 +76,7 @@ $dataHtml = JsonToTabel($dataJson);
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">DataTable with default features</h3>
+                            <h3 class="card-title">list data alat</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -81,7 +90,7 @@ $dataHtml = JsonToTabel($dataJson);
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php echo $dataHtml;?>
+                                    <?php echo $dataHtml; ?>
                                 </tbody>
                                 <!-- <tfoot>
                                     <tr>
@@ -106,32 +115,63 @@ $dataHtml = JsonToTabel($dataJson);
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form action="<?=Url::BaseUrl().'/api/alat/add'?>" method="post" enctype="multipart/form-data">
-                <div class="card-body">
-                    <div class="form-group" id="alatId" hidden>
-                        <label for="form-id">id</label>
-                        <input type="text" value="" class="form-control" id="form-id" placeholder="">
+                <form action="<?= Url::BaseUrl() . '/alat/add' ?>" method="post" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="form-name">Nama</label>
+                            <input type="text" value="" name="nama" class="form-control" id="form-name" placeholder="">
+                        </div>
+                        <label for="form-gambar">Gambar</label>
+                        <div class="custom-file form-group">
+                            <input type="file" class="custom-file-input" name="foto-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
+                            <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="form-name">Nama</label>
-                        <input type="text" value="" class="form-control" id="form-name" placeholder="">
-                    </div>
-                    <label for="form-gambar">Gambar</label>
-                    <div class="custom-file form-group">
-                        <input type="file" class="custom-file-input" name="gambar-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
-                        <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
-                    </div>
-                </div>
-                
-                <!-- /.card-body -->
 
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary" onclick="">Submit</button>
-                </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" onclick="">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>
 
     </div>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="model_form_alat" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Alat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?=Url::BaseUrl()?>alat/update" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group" id="alatId">
+                        <label for="form-id">id</label>
+                        <input type="text" value="" name="id" class="form-control" id="model-form-id" placeholder="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="form-name">Nama</label>
+                        <input type="text" value="" name="nama" class="form-control" id="model-form-name" placeholder="">
+                    </div>
+                    <label for="form-gambar">Gambar</label>
+                    <div class="custom-file form-group" id="model-container-gambar">
+                        <input type="file" class="custom-file-input" name="foto-alat" id="model-file-alat" onchange="getFile(this)">
+                        <label class="custom-file-label" for="customFile" id="model-form-gambar">Gambar</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <!-- /.content-header -->

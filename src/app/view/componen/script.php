@@ -133,63 +133,6 @@ use LearnPhpMvc\Config\Url;
         })
     }
 
-    function submitAlat() {
-        var formNama = document.getElementById('form-name');
-        var formId = document.getElementById('form-id');
-        var formGamabr = document.getElementById('upload-file-alat');
-
-        var nama = formNama.value;
-        var Id = formId.value;
-        var Gambar = formGamabr.value.split("\\").pop();
-
-        console.log(formNama.value);
-        console.log(formId.value);
-        console.log(formGamabr.value.split("\\").pop());
-
-
-        if (alatIsEdit) {
-            if (formGamabr.value) {
-                var json = JSON.stringify({
-                    "id": formId.value,
-                    "nama": formNama.value,
-                    "gambar": Gambar
-                })
-                console.log(json);
-                alatIsEdit = false;
-                xhttp.open("POST", baseUrl + "api/alat/edit", true);
-                xhttp.setRequestHeader('Conten-Type', 'aplication/json');
-                xhttp.send(json);
-                console.log(xhttp.responseText);
-            } else {
-                var json = JSON.stringify({
-                    "id": formId.value,
-                    "nama": formNama.value
-                })
-                console.log(json);
-                xhttp.open("POST", baseUrl + "api/alat/edit/nama", true);
-                xhttp.setRequestHeader('Conten-Type', 'aplication/json');
-                xhttp.send(json);
-                console.log(xhttp.responseText);
-            }
-        } else {
-            if (formGamabr.value && formNama.value) {
-                var json = JSON.stringify({
-                    "nama": formNama.value,
-                    "gambar": Gambar
-                })
-                console.log(json);
-                xhttp.open("POST", baseUrl + "api/alat/add", true);
-                xhttp.setRequestHeader('Conten-Type', 'aplication/json');
-                xhttp.send(json);
-                console.log(xhttp.responseText);
-            } else {
-                alert("tolong isi semua form");
-            }
-        }
-
-        // window.location.replace("http://localhost/mmagym/src/public/alat");
-
-    }
 
     function changeLabelGambarALat() {
         var labelGamabr = document.getElementById('form-gambar');
@@ -201,20 +144,6 @@ use LearnPhpMvc\Config\Url;
         formId.style.visibility = 'hidden';
     }
 
-    function deleteAlat() {
-        var tr = event.target.parentNode.parentNode;
-        var id = tr.childNodes[1];
-        tr.style.visibility = "collapse";
-        var json = JSON.stringify({
-            "id": id.innerHTML
-        });
-        xhttp.open("POST", baseUrl + "/api/alat/delet", true);
-        xhttp.setRequestHeader('Conten-Type', 'aplication/json');
-        xhttp.send(json);
-        console.log(xhttp.responseText);
-        console.log(id.innerHTML);
-
-    }
 
 
 
@@ -248,3 +177,4 @@ use LearnPhpMvc\Config\Url;
 <script src="<?=Url::BaseUrl()?>js/user.js"></script>
 <script src="<?=Url::BaseUrl()?>js/menulatihan.js"></script>
 <script src="<?=Url::BaseUrl()?>js/gerakan.js"></script>
+<script src="<?=Url::BaseUrl()?>js/alat.js"></script>

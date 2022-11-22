@@ -53,7 +53,7 @@ Router::add('POST','/api/user/delet',userController::class,'deleteData');
 
 //api alat
 Router::add('GET','/api/alat/findAll',AlatController::class,'findAll');
-Router::add('POST','/api/alat/findByName',AlatController::class,'findByName');
+Router::add('POST','/api/alat/name',AlatController::class,'findByName');
 Router::add('POST','/api/alat/add',AlatController::class,'addData');
 Router::add('POST','/api/alat/edit',AlatController::class,'editData');
 Router::add('POST','/api/alat/delet',AlatController::class,'deleteData');
@@ -80,14 +80,22 @@ Router::add('POST','/api/jadwal/user',JadwalController::class,'findByUser');
 //api riwayat
 Router::add('POST','/api/riwayat/user',RiwayatController::class,'findRiwayatGerakanByUser');
 
-//w=web
+
+
+//web
 Router::add('GET', '/admin/login', LoginController::class, 'index');
 Router::add('GET', '/', LandingPageController::class, 'index');
 Router::add('POST', '/submit/login', LoginController::class, 'login');
 
 //admin
 Router::add('GET', '/admin', HomeController::class, 'index');
+
+//alat
 Router::add('GET', '/alat', AlatControllerView::class, 'index');
+Router::add('POST', '/alat/update', AlatControllerView::class, 'update');
+Router::add('POST', '/alat/add', AlatControllerView::class, 'add');
+Router::add('GET', '/alat/delete', AlatControllerView::class, 'delete');
+
 Router::add('GET', '/user', UsersControllerView::class, 'index');
 Router::add('GET', '/gerakan', GerakanControllerView::class, 'index');
 Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');

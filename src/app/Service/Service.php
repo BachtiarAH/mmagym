@@ -22,7 +22,7 @@ class Service
 
         if ($type == "format") {
             $respons['status'] = "fail";
-            $respons['message'] = "format json salah";
+            $respons['message'] = "format request salah";
         }
 
         return $respons;
@@ -62,9 +62,9 @@ class Service
     public function googleDriveReplaceFile(String $fileId,$formKey,$postRequest = array(),String $parent)
     {
         try {
-            $this->googleDriveUpload($postRequest,$formKey,$parent);
+            $idGambar = $this->googleDriveUpload($postRequest,$formKey,$parent);
             $this->googleDriveDelete($fileId);
-            return "success";
+            return $idGambar;
         } catch (Exception $th) {
             return "somthing wrong ". $th->getMessage();
         }

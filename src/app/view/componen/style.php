@@ -16,6 +16,7 @@ use LearnPhpMvc\Config\Url;
 <!-- css local -->
 <link rel="stylesheet" href="<?= Url::BaseUrl() ?>css/style-menu-latihan.css">
 <link rel="stylesheet" href=" <?= Url::BaseUrl() ?>css/style-user.css">
+<link rel="stylesheet" href="<?=Url::BaseUrl()?>css/style-semua.css">
 <!-- DataTables -->
 <link rel="stylesheet" href="<?= Url::BaseUrl() ?>AdminLTE-3.2.0/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="<?= Url::BaseUrl() ?>AdminLTE-3.2.0/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">

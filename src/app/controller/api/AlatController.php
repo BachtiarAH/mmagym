@@ -41,8 +41,8 @@ class AlatController
         $data = array();
         // mengubah json ke array
         $arr = json_decode($json);
-        if (isset($arr->name)) {
-            $data = $this->service->findByName($arr->name);
+        if (isset($arr->nama)) {
+            $data = $this->service->findByName($arr->nama);
         } else {
             $data = $this->service->FailResponse("format");
         }
@@ -59,18 +59,12 @@ class AlatController
 
     public function addData()
     {
-        // $json = file_get_contents('php://input');
-        // $filepath = $_FILES['gambar-alat'];
-        // var_dump($filepath);
-        // $data = json_decode($json);
         echo json_encode($this->service->addData($_FILES,$_POST));
     }
 
     public function editData()
     {
-        $json = file_get_contents('php://input');
-        $data = json_decode($json);
-        echo json_encode($this->service->editData($data));
+        echo json_encode($this->service->editData($_FILES,$_POST));
     }
 
     public function editNameData()

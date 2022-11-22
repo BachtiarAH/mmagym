@@ -66,6 +66,35 @@ class AlatRepository{
         return $respons;
     }
 
+    public function findById($id)
+    {
+        $respons = array();
+        $respons['status']= "";
+        $respons['respons_code']="";
+        $respons['body'] = array();
+        $sql = "SELECT * FROM `alat` WHERE id_alat= '$id'";
+        $result = $this->connecetion->query($sql);
+
+        if ($result->rowCount()>0) {
+            $respons['status'] = "oke";
+            $respons['respons_code'] = 200;
+            while ($row=$result->fetch(\PDO::FETCH_ASSOC)) {
+                $item = array(
+                    'id'=>$row['id_alat'],
+                    'nama'=>$row['nama_alat'],
+                    'gambar'=>$row['gambar']
+                );
+                array_push($respons['body'],$item);
+            }
+        }else {
+            $respons['status'] = "not found";
+            $respons['respons_code'] = 404;
+            $respons['massage'] = "Data tidak ditemukan";
+        }
+
+        return $respons;
+    }
+
     public function addData($nama,$gambar)
     {
         $respons = array();
