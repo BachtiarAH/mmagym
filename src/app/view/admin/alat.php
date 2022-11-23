@@ -92,14 +92,6 @@ $dataHtml = JsonToTabel($dataJson);
                                 <tbody>
                                     <?php echo $dataHtml; ?>
                                 </tbody>
-                                <!-- <tfoot>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>nama</th>
-                                        <th>gambar</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot> -->
                             </table>
                         </div>
                         <!-- /.card-body -->

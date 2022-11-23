@@ -1,3 +1,81 @@
+<?php
+
+use LearnPhpMvc\Config\Url;
+
+function getuser()
+{
+    $curl = curl_init();
+
+curl_setopt_array($curl, array(
+		CURLOPT_URL => url::BaseUrl().'/api/user/all',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+return $response;
+}
+
+function JsonToTabel($json)
+{
+    $html = '';
+    $object = json_decode($json);
+    if (isset($object->body)) {
+        $data = $object->body;
+        if (isset($data[0]->id) && isset($data[0]->nama)) {
+            for ($i = 0; $i < count($data); $i++) {
+                $id = $data[$i]->id;
+                $nama = $data[$i]->nama;
+                $password = $data[$i]->password;
+                $email = $data[$i]->email;
+                $alamat = $data[$i]->alamat;
+                $aksesIndex = $data[$i]->akses;
+                $hakAkses = 'user';
+                if ($aksesIndex == 1) {
+                    $hakAkses = 'user';
+                } else if($aksesIndex == 2){
+                    $hakAkses = 'admin';
+                }else{
+                    $hakAkses = 'unknow';
+                }
+                
+                
+                $html .= "
+                <tr>
+                    <td>$id</td>
+                    <td>$nama</td>
+                    <td>$email</td>
+                    <td>$alamat</td>
+                    <td data-akses='$aksesIndex'>$hakAkses</td>
+                    <td>
+                        <div class='row'>
+                            <a href='" . url::BaseUrl() . "/alat/delete?id=$id'>
+                                <i class='fa-solid fa-trash col' data-id='$id'></i>
+                            </a>
+                            <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat' data-email='$email' data-id='$id' data-nama='$nama' data-alamat='$alamat' data-akses='$aksesIndex' onclick='setModelForm(this)'></i>
+                        </div>
+                    </td>
+                </tr>
+                ";
+            }
+        }
+    }
+
+    return $html;
+}
+
+$responseJson = getuser();
+$dataHtml = JsonToTabel($responseJson);
+
+?>
+
 <div class="navbar navbar-light bg-light justify-content-between">
     <h1 class="m-0">User</h1>
     <form class="form-inline">
@@ -12,96 +90,24 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Admin</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="card-title">list data user</h3>
                     </div>
                     <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 300px;">
-                        <table class="table table-head-fixed text-nowrap">
+                    <div class="card-body">
+
+                        <table id="table-user" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama</th>
-                                    <th>Password</th>
-                                    <th>Email</th>
-                                    <th>Alamat</th>
-                                    <th>Action</th>
+                                    <th>id</th>
+                                    <th>nama</th>
+                                    <th>password</th>
+                                    <th>email</th>
+                                    <th>alamat</th>
+                                    <th>akses</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td contenteditable="true">183</td>
-                                    <td>John Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    <td>
-                                        <div class="row-sm">
-                                            <i class="fa-solid fa-pen-to-square"></i>
-                                            <i class="fa-solid fa-trash"></i>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>219</td>
-                                    <td>Alexander Pierce</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-warning">Pending</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>657</td>
-                                    <td>Bob Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-primary">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>175</td>
-                                    <td>Mike Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-danger">Denied</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>134</td>
-                                    <td>Jim Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>494</td>
-                                    <td>Victoria Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-warning">Pending</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>832</td>
-                                    <td>Michael Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-primary">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>982</td>
-                                    <td>Rocky Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-danger">Denied</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
+                                <?=$dataHtml?>
                             </tbody>
                         </table>
                     </div>
@@ -111,103 +117,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">User</h3>
-
-                        <div class="card-tools">
-                            <div class="input-group input-group-sm" style="width: 150px;">
-                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body table-responsive p-0" style="height: 300px;">
-                        <table class="table table-head-fixed text-nowrap">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>User</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                    <th>Reason</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>183</td>
-                                    <td>John Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>219</td>
-                                    <td>Alexander Pierce</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-warning">Pending</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>657</td>
-                                    <td>Bob Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-primary">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>175</td>
-                                    <td>Mike Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-danger">Denied</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>134</td>
-                                    <td>Jim Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-success">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>494</td>
-                                    <td>Victoria Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-warning">Pending</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>832</td>
-                                    <td>Michael Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-primary">Approved</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                                <tr>
-                                    <td>982</td>
-                                    <td>Rocky Doe</td>
-                                    <td>11-7-2014</td>
-                                    <td><span class="tag tag-danger">Denied</span></td>
-                                    <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-            </div>
-        </div>
     </div>
-
     <div class="col-sm-4">
         <div class="card card-primary">
             <div class="card-header">
@@ -241,6 +151,8 @@
                 </div>
             </form>
         </div>
+
+
+
     </div>
-</div>
-<!-- /.content-header -->
+    <!-- /.content-header -->
