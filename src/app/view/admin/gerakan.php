@@ -25,7 +25,7 @@ function JsonToTabel($json)
                 <tr >
                     <td class='id' onclick='tbClicked()'> $id </td>
                     <td class='data-nama'' contenteditable='true' onclick='tbClicked()'> $nama</td>
-                    <td class='' ><i class='fa-brands fa-youtube fa-xl'></i></td>
+                    <td class='' ><a href='https://drive.google.com/file/d/$video/view?usp=sharing' target='blank'><i class='fa-brands fa-youtube fa-xl'></i></a></td>
                     <td class='data-gambar' > <img src='https://drive.google.com/uc?export=view&id=$gambar' alt='$gambar' srcset=''></td>
                     <td class='' > $alat</td>
                     <td> <i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td>
