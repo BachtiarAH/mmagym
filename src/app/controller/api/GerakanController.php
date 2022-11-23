@@ -18,7 +18,7 @@ class GerakanController{
     {
         $json = file_get_contents('php://input');
         $data = json_decode($json);
-        echo json_encode($this->service->addData($data));
+        echo json_encode($this->service->addData($_FILES,$_POST));
     }
 
     public function findAll()

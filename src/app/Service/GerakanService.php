@@ -11,10 +11,14 @@ class GerakanService extends Service{
         $this->repo = $repo;
     }
 
-    public function addData($data)
+    public function addData($file,$data)
     {
-        if (isset($data->nama) &&isset($data->video)&&isset($data->gambar)&&isset($data->id_alat)) {
-            return $this->repo->addData($data->nama,$data->video,$data->gambar,$data->id_alat);
+        if (isset($data['nama']) &&isset($file['video-gerakan'])&&isset($file['foto-gerakan'])&&isset($data['id_alat'])) {
+            $nama = $data['nama'];
+            $id_alat = $data['id_alat'];
+            $idVideo = $this->googleDriveUpload($file,'video-gerakan','1KHsVlh1AwMGgpRdCi6W9wTzg52YhQVzW');
+            $idfoto = $this->googleDriveUpload($file,'foto-gerakan','1JmaM2LER4bo1fQM3o226RS-yPI93NOuq');
+            return $this->repo->addData($nama, $idVideo, $idfoto, $id_alat);
         }else{
             return $this->FailResponse("format");
         }

@@ -34,6 +34,10 @@ function JsonToTabel($json)
                 $id = $data[$i]->id;
                 $nama = $data[$i]->nama;
                 $password = $data[$i]->password;
+                $password_sensored = '';
+                for ($j=0; $j < strlen($password); $j++) { 
+                    $password_sensored .= '*';
+                }
                 $email = $data[$i]->email;
                 $alamat = $data[$i]->alamat;
                 $aksesIndex = $data[$i]->akses;
@@ -51,6 +55,7 @@ function JsonToTabel($json)
                 <tr>
                     <td>$id</td>
                     <td>$nama</td>
+                    <td>$password_sensored</td>
                     <td>$email</td>
                     <td>$alamat</td>
                     <td data-akses='$aksesIndex'>$hakAkses</td>
@@ -121,7 +126,7 @@ $dataHtml = JsonToTabel($responseJson);
     <div class="col-sm-4">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">edit / add</h3>
+                <h3 class="card-title">add</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2022 at 07:58 AM
+-- Generation Time: Nov 23, 2022 at 04:07 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `alat` (
   `id_alat` int(11) NOT NULL,
   `nama_alat` varchar(30) NOT NULL,
-  `gambar` varchar(50) NOT NULL
+  `gambar` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -38,8 +38,11 @@ CREATE TABLE `alat` (
 --
 
 INSERT INTO `alat` (`id_alat`, `nama_alat`, `gambar`) VALUES
-(2, 'tread mile', 'treadmile'),
-(3, 'resistan-belt', 'resistan-belt.jpg');
+(2, 'tread mil', 'success'),
+(3, 'resistan-belt', 'resistan-belt.jpg'),
+(23, 'dummbell', '1YV2CYs8AX7ZgQFMCyfGuzEGfcnVdqxUD'),
+(24, 'benchpress', '1dLsl3IcBgAHenj3bshRk_oxKGT8lQF-Z'),
+(26, 'treadmil', '15UH3hBG_-hVcXL4ptN3djlMXKA_3jvKk');
 
 -- --------------------------------------------------------
 
@@ -61,7 +64,9 @@ CREATE TABLE `gerakan` (
 
 INSERT INTO `gerakan` (`id_gerakan`, `nama_gerakan`, `video`, `gambar`, `id_alat`) VALUES
 (1, 'lari', 'lari.mp4', 'lari.jpg', 2),
-(5, 'gerakan', 'gerakan.mp4', 'gerakan.jpg', 3);
+(5, 'gerakan', 'gerakan.mp4', 'gerakan.jpg', 3),
+(6, 'tes api', '1gG0kHiI0Sbo4mNKMDJoO6Cw6-1mCmwYg', '', 23),
+(7, 'tes api 2', '10KkWKYQroXMlTIILn1c0gEiwgUn0_2mt', '1R33ilG0YAXAT5yBLC7EcGhUBY5a8T2ZF', 23);
 
 -- --------------------------------------------------------
 
@@ -132,6 +137,24 @@ INSERT INTO `menu_latihan` (`id_menu_latihan`, `nama_menu_latihan`, `part`, `lev
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `otp`
+--
+
+CREATE TABLE `otp` (
+  `email` varchar(255) NOT NULL,
+  `otp` int(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `otp`
+--
+
+INSERT INTO `otp` (`email`, `otp`) VALUES
+('coba@coab.cob', 8590);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `riwayat`
 --
 
@@ -172,7 +195,9 @@ CREATE TABLE `usermma` (
 INSERT INTO `usermma` (`id`, `nama`, `password`, `email`, `Alamat`, `akses`) VALUES
 (1, 'Bachtiar Arya Habibie', '1234', 'bachtiar@mma.gym', 'Jember', 1),
 (2, 'Syarafina Khalishah', '170903', 'syarafina17@gmail.com', 'Bondowoso', 1),
-(4, 'Nugroho Jeri', 'qwerty', 'jeri@nug.com', 'Pacitan', 2);
+(4, 'Nugroho Jeri', 'qwerty', 'jeri@nug.com', 'Pacitan', 2),
+(5, 'coba', 'qwer', 'coba@coab.cob', 'jember', 0),
+(6, 'bachtiar', 'bachtiar', 'bachtiarah73@gmail.com', 'jember', 1);
 
 --
 -- Indexes for dumped tables
@@ -189,7 +214,7 @@ ALTER TABLE `alat`
 --
 ALTER TABLE `gerakan`
   ADD PRIMARY KEY (`id_gerakan`),
-  ADD KEY `id_alat` (`id_alat`);
+  ADD KEY `gerakan_ibfk_1` (`id_alat`);
 
 --
 -- Indexes for table `gerakan_menu`
@@ -233,13 +258,13 @@ ALTER TABLE `usermma`
 -- AUTO_INCREMENT for table `alat`
 --
 ALTER TABLE `alat`
-  MODIFY `id_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `gerakan`
 --
 ALTER TABLE `gerakan`
-  MODIFY `id_gerakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_gerakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jadwal_latihan`
@@ -257,7 +282,7 @@ ALTER TABLE `menu_latihan`
 -- AUTO_INCREMENT for table `usermma`
 --
 ALTER TABLE `usermma`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -267,7 +292,7 @@ ALTER TABLE `usermma`
 -- Constraints for table `gerakan`
 --
 ALTER TABLE `gerakan`
-  ADD CONSTRAINT `gerakan_ibfk_1` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`);
+  ADD CONSTRAINT `gerakan_ibfk_1` FOREIGN KEY (`id_alat`) REFERENCES `alat` (`id_alat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `gerakan_menu`
