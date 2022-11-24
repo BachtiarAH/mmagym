@@ -1,3 +1,10 @@
+
+
+function tesGerakan(even) {
+    console.log('fungsi terpanggil');
+    // console.log(even);
+}
+
 $(function() {
     $("#table-gerakan").DataTable({
         "fixedHeader": true,
@@ -24,7 +31,13 @@ $(function() {
             {
                 "searchable": false,
                 "targets": 4
-            }
+            },
+            {
+                "searchable": false,
+                "targets": 5
+            },
         ]
     }).buttons().container().appendTo(' .col-md-6:eq(0)');
 });
+
+

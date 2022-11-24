@@ -97,7 +97,12 @@ Router::add('POST', '/alat/add', AlatControllerView::class, 'add');
 Router::add('GET', '/alat/delete', AlatControllerView::class, 'delete');
 
 Router::add('GET', '/user', UsersControllerView::class, 'index');
+
+//gerakan
 Router::add('GET', '/gerakan', GerakanControllerView::class, 'index');
+Router::add('POST', '/gerakan/add', GerakanControllerView::class, 'addData');
+Router::add('GET', '/gerakan/delete', GerakanControllerView::class, 'delete');
+
 Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');

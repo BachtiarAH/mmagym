@@ -16,7 +16,7 @@ class GerakanRepository
         $respons = array();
         $respons['status'] = '';
         $respons['body'] = array();
-        $sql = "SELECT `id_gerakan`, `nama_gerakan`, `video`, gerakan.gambar, alat.nama_alat FROM `gerakan` 
+        $sql = "SELECT `id_gerakan`, `nama_gerakan`, `video`, gerakan.gambar, alat.id_alat, alat.nama_alat FROM `gerakan` 
         JOIN alat ON alat.id_alat = gerakan.id_alat
         WHERE 1";
         $result = $this->connection->query($sql);
@@ -29,6 +29,7 @@ class GerakanRepository
                     'gerakan' => $row['nama_gerakan'],
                     'video' => $row['video'],
                     'gambar' => $row['gambar'],
+                    'id_alat' => $row['id_alat'],
                     'alat' => $row['nama_alat'],
                 );
                 array_push($respons['body'], $item);

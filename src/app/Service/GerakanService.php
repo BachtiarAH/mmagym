@@ -58,10 +58,15 @@ class GerakanService extends Service{
         
     }
 
-    public function editData($data)
+    public function editData($file,$post)
     {
-        if (isset($data->nama) &&isset($data->video)&&isset($data->gambar)&&isset($data->id_alat)&&isset($data->id)) {
-            return $this->repo->editData($data->id,$data->nama,$data->video,$data->gambar,$data->id_alat);
+        if (isset($post['nama']) &&isset($file['foto-gerakan'])&&isset($file['video-gerakan'])&&isset($post['id_alat'])&&isset($post['id'])) {
+            $result = $this->repo->findById($post['id']);
+            $gambar = $result['body'][0]['gambar'];
+            $video = $result['body'][0]['video'];
+            $this->googleDriveReplaceFile($gambar,'foto-gerakan',$file,'1JmaM2LER4bo1fQM3o226RS-yPI93NOuq');
+            $this->googleDriveReplaceFile($video,'video-gerakan',$file,'1KHsVlh1AwMGgpRdCi6W9wTzg52YhQVzW');
+            return $this->repo->editData($post['id'],$post['nama'],$video,$gambar,$post['id_alat']);
         } else {
             return $this->FailResponse('format');
         }
@@ -71,6 +76,11 @@ class GerakanService extends Service{
     public function deleteData($data)
     {
         if (isset($data->id)) {
+            $result = $this->repo->findById($data->id);
+            $gambar = $result['body'][0]['gambar'];
+            $video = $result['body'][0]['video'];
+            $this->googleDriveDelete($gambar);
+            $this->googleDriveDelete($video);
             return $this->repo->deleteData($data->id);
         }else{
             return $this->FailResponse('format');

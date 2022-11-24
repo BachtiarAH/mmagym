@@ -177,4 +177,5 @@ use LearnPhpMvc\Config\Url;
 <script src="<?=Url::BaseUrl()?>js/user.js"></script>
 <script src="<?=Url::BaseUrl()?>js/menulatihan.js"></script>
 <script src="<?=Url::BaseUrl()?>js/gerakan.js"></script>
+<script src="<?=Url::BaseUrl()?>js/gerakan2.js"></script>
 <script src="<?=Url::BaseUrl()?>js/alat.js"></script>
