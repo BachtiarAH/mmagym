@@ -25,3 +25,17 @@ function setLabelInput(even) {
         label.innerHTML = filename;
     }
 }
+
+function setModalFormGerakan(even) {
+    id = even.getAttribute('data-id');
+    idAlat = even.getAttribute('data-idAlat');
+    nama = even.getAttribute('data-nama');
+
+    formId = document.getElementById('modal-form-id');
+    formNama = document.getElementById('modal-form-name');
+    formIdAlat = document.getElementById('modal-form-idAlat');
+
+    formId.value = id;
+    formNama.value = nama;
+    formIdAlat.value = idAlat;
+}

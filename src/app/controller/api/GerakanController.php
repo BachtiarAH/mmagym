@@ -49,9 +49,25 @@ class GerakanController{
 
     public function editData()
     {
+        
+        echo json_encode($this->service->editData($_FILES,$_POST));
+    }
+
+    public function editNoFIle()
+    {
         $json = file_get_contents('php://input');
         $data = json_decode($json);
-        echo json_encode($this->service->editData($data));
+        echo json_encode($this->service->editDataNoFile($data));
+    }
+
+    public function editdataWithFoto()
+    {
+        echo json_encode($this->service->editDataWithFoto($_POST,$_FILES));
+    }
+
+    public function editDataWithVideo()
+    {
+        echo json_encode($this->service->editDataWithVideo($_POST,$_FILES));
     }
 
     public function deleteData()

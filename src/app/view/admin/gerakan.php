@@ -75,7 +75,7 @@ function JsonToTabel($json)
                     <td>
                         <div class='row'>
                             <a href='" . url::BaseUrl() . "gerakan/delete?id=$id'><i class='fa-solid fa-trash'></i></a>
-                            <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#modal-form-gerakan'  data-id='$id' data-idAlat='$id_alat' data-nama='$nama' onclick='setModelForm(this)'></i>
+                            <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#modal-form-gerakan'  data-id='$id' data-idAlat='$id_alat' data-nama='$nama' onclick='setModalFormGerakan(this)'></i>
                         </div>
                     </td>
                 </tr>
@@ -219,33 +219,37 @@ $alatHtml = jsonToOption(getalat());
             </div>
 
             <div class="modal-body" id="">
-                <form action="<?= Url::BaseUrl() ?>gerakan/add" method="post" enctype="multipart/form-data">
+                <form action="<?= Url::BaseUrl() ?>gerakan/edit" method="post" enctype="multipart/form-data">
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="form-name">Id</label>
+                            <input required type="text" value="" name="id" class="form-control" id="modal-form-id" placeholder="" readonly>
+                        </div>
+                        <div class="form-group">
                             <label for="form-name">Nama</label>
-                            <input required type="text" value="" name="nama" class="form-control" id="form-name" placeholder="">
+                            <input required type="text" value="" name="nama" class="form-control" id="modal-form-name" placeholder="">
                         </div>
                         <label for="form-gambar">Gambar</label>
                         <div class="custom-file form-group">
-                            <input required accept="image/*" onchange="setLabelInput(this)" type="file" class="custom-file-input" name="foto-gerakan" id="upload-file-alat" onchange="">
+                            <input accept="image/*" onchange="setLabelInput(this)" type="file" class="custom-file-input" name="foto-gerakan" id="upload-file-alat" onchange="">
                             <label class="custom-file-label" for="customFile" id="form-gambar">masukan gambar disini</label>
                         </div>
                         <label for="form-gambar">Video</label>
                         <div class="custom-file form-group">
-                            <input required accept="video/*" onchange="setLabelInput(this)" type="file" class="custom-file-input" name="video-gerakan" id="upload-file-alat" onchange="">
+                            <input accept="video/*" onchange="setLabelInput(this)" type="file" class="custom-file-input" name="video-gerakan" id="upload-file-alat" onchange="">
                             <label class="custom-file-label" for="customFile" id="form-gambar">masukan video disini</label>
                         </div>
                         <!-- select -->
                         <div class="form-group">
                             <label>Select</label>
-                            <select required name="id_alat" class="form-control">
+                            <select id="modal-form-idAlat" required name="id_alat" class="form-control">
                                 <option value=""></option>
                                 <?= $alatHtml ?>
                             </select>
                         </div>
                     </div>
 
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="bersihkanmodel()" class="btn btn-secondary" data-dismiss="modal">Close</button>

@@ -64,6 +64,9 @@ Router::add('POST','/api/alat/tesUpload',AlatController::class, 'uploadBasic');
 //api gerakan
 Router::add('POST','/api/gerakan/add',GerakanController::class,'addData');
 Router::add('POST','/api/gerakan/edit',GerakanController::class,'editData');
+Router::add('POST','/api/gerakan/edit/noFile',GerakanController::class,'editNoFIle');
+Router::add('POST','/api/gerakan/edit/Withfot',GerakanController::class,'editdataWithFoto');
+Router::add('POST','/api/gerakan/edit/Withvid',GerakanController::class,'editDataWithVideo');
 Router::add('POST','/api/gerakan/delete',GerakanController::class,'deleteData');
 Router::add('POST','/api/gerakan/id',GerakanController::class,'findById');
 Router::add('POST','/api/gerakan/name',GerakanController::class,'findByName');
@@ -101,6 +104,7 @@ Router::add('GET', '/user', UsersControllerView::class, 'index');
 //gerakan
 Router::add('GET', '/gerakan', GerakanControllerView::class, 'index');
 Router::add('POST', '/gerakan/add', GerakanControllerView::class, 'addData');
+Router::add('POST', '/gerakan/edit', GerakanControllerView::class, 'edit');
 Router::add('GET', '/gerakan/delete', GerakanControllerView::class, 'delete');
 
 Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');
