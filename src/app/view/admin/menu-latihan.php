@@ -1,7 +1,28 @@
 <?php
-$result = $api->get("/api/alat/findAll", ['q' => "#php"]);
-// var_dump($result->response);
-$dataJson = $result->response;
+
+use LearnPhpMvc\Config\Url;
+
+
+function getMenuLatihan()
+{
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => Url::BaseUrl().'api/menu/all',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    return $response;
+}
 
 function JsonToTabel($json)
 {
@@ -13,15 +34,24 @@ function JsonToTabel($json)
             for ($i = 0; $i < count($data); $i++) {
                 $id = $data[$i]->id;
                 $nama = $data[$i]->nama;
+                $part = $data[$i]->part;
+                $level = $data[$i]->level;
                 $gambar = $data[$i]->gambar;
 
                 $html .= "
-                <tr >
-                    <td class='id' onclick='tbClicked()'> $id </td>
-                    <td class='data-nama' onchange='tes()' contenteditable='true' onclick='tbClicked()'> $nama</td>
-                    <td class='data-gambar' onchange='tes()' onclick='tbClicked()'> $gambar</td>
-                    <td><i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td>
-                </tr>
+                        <tr>
+                            <td>$id</td>
+                            <td>$nama</td>
+                            <td>$part</td>
+                            <td>$level</td>
+                            <td>$gambar</td>
+                            <td>
+                                <div class='row'>
+                                    <a href=''><i class='fa-solid fa-trash'></i></a>
+                                    <i class='fa-solid fa-pen-to-square col'></i>
+                                </div>
+                            </td>
+                        </tr>
                 ";
             }
         }
@@ -31,12 +61,12 @@ function JsonToTabel($json)
 }
 
 
-$dataHtml = JsonToTabel($dataJson);
+$dataHtml = JsonToTabel(getMenuLatihan());
 // var_dump($dataHtml);
 
 ?>
 
-?>
+
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -64,84 +94,21 @@ $dataHtml = JsonToTabel($dataJson);
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">List Menu Latihan</h3>
-                <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="card-body">
-                <table class="table table-hover">
+                <table id="table-menu" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>id</th>
                             <th>nama menu</th>
                             <th>part</th>
                             <th>level</th>
                             <th>gambar</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr data-widget="expandable-table" aria-expanded="false">
-                            <td>183</td>
-                            <td>menu latihan 1</td>
-                            <td>seluruh badan</td>
-                            <td>beginer</td>
-                            <td>gambar</td>
-                        </tr>
-                        <tr class="expandable-body">
-                            <td colspan="5">
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>nama gerakan</th>
-                                                <th>note</th>
-                                                <th>repetisi</th>
-                                                <th>set</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>183</td>
-                                                <td>John Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span class="tag tag-success">Approved</span></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>219</td>
-                                                <td>Alexander Pierce</td>
-                                                <td>11-7-2014</td>
-                                                <td><span class="tag tag-warning">Pending</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>657</td>
-                                                <td>Bob Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span class="tag tag-primary">Approved</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                            <tr>
-                                                <td>175</td>
-                                                <td>Mike Doe</td>
-                                                <td>11-7-2014</td>
-                                                <td><span class="tag tag-danger">Denied</span></td>
-                                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </td>
-                        </tr>
+                        <?=$dataHtml?>
                     </tbody>
                 </table>
             </div>

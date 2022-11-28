@@ -1,10 +1,3 @@
-
-
-function tesGerakan(even) {
-    console.log('fungsi terpanggil');
-    // console.log(even);
-}
-
 $(function() {
     $("#table-gerakan").DataTable({
         "fixedHeader": true,

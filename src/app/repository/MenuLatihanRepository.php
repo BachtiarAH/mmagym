@@ -18,7 +18,7 @@ class MenuLatihanRepository
     {
         $respons = array();
         try {
-            
+
             $respons['status'] = '';
             $respons['body'] = array();
             $sql = "SELECT * FROM `menu_latihan`";
@@ -28,7 +28,7 @@ class MenuLatihanRepository
                 $respons['status'] = "oke";
                 while ($row = $result->fetch(\PDO::FETCH_ASSOC)) {
                     $item = array(
-                        
+
                         'id' => $row['id_menu_latihan'],
                         'nama' => $row['nama_menu_latihan'],
                         'part' => $row['part'],
@@ -53,7 +53,7 @@ class MenuLatihanRepository
     {
         $respons = array();
         try {
-            
+
             $respons['status'] = '';
             $respons['body'] = array();
             $respons['body']['header'] = array();
@@ -79,13 +79,13 @@ class MenuLatihanRepository
                         'note' => $row['note'],
                     );
                     $header = array(
-                        'nama_menu_latihan'=>$row['nama_menu_latihan'],
-                        'part'=>$row['part'],
-                        'level'=>$row['level']
+                        'nama_menu_latihan' => $row['nama_menu_latihan'],
+                        'part' => $row['part'],
+                        'level' => $row['level']
                     );
                     array_push($respons['body']['isi'], $item);
                 }
-                array_push($respons['body']['header'],$header);
+                array_push($respons['body']['header'], $header);
             } else {
                 $respons['status'] = "fail";
                 $respons['massage'] = "data tidak ada";
@@ -97,5 +97,47 @@ class MenuLatihanRepository
 
         return $respons;
     }
-}
 
+    public function addData($nama,$part,$level,$gambar)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "INSERT INTO `menu_latihan`(`nama_menu_latihan`, `part`, `level`, `gambar`) 
+            VALUES 
+            ('$nama','$part','$level','$gambar')";
+            $stmt = $this->connecetion->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+    public function addRincian($repetisi,$set,$note,$id_gerakan,$id_menu_latihan)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "INSERT INTO `gerakan_menu`(`repetisi`, `setlatihan`, `note`, `id_gerakan`, `id_menu_latihan`) 
+            VALUES ('$repetisi','$set','','[value-4]','[value-5]')";
+            $stmt = $this->connecetion->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+}

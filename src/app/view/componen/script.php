@@ -38,8 +38,8 @@ use LearnPhpMvc\Config\Url;
 <script src="AdminLTE-3.2.0/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <!-- jsGrid -->
-<script src="<?=Url::BaseUrl()?>AdminLTE-3.2.0/plugins/jsgrid/demos/db.js"></script>
-<script src="<?=Url::BaseUrl()?>AdminLTE-3.2.0/plugins/jsgrid/jsgrid.min.js"></script>
+<script src="<?= Url::BaseUrl() ?>AdminLTE-3.2.0/plugins/jsgrid/demos/db.js"></script>
+<script src="<?= Url::BaseUrl() ?>AdminLTE-3.2.0/plugins/jsgrid/jsgrid.min.js"></script>
 
 
 <!-- ChartJS -->
@@ -51,7 +51,7 @@ use LearnPhpMvc\Config\Url;
 <script src="https://kit.fontawesome.com/5c43977293.js" crossorigin="anonymous"></script>
 
 <script>
-    $(function() {
+    $(document).ready(function() {
         $("#table-alat").DataTable({
             "fixedHeader": true,
             "responsive": true,
@@ -74,6 +74,34 @@ use LearnPhpMvc\Config\Url;
                     "searchable": false,
                     "targets": 3
                 }
+            ]
+        }).buttons().container().appendTo(' .col-md-6:eq(0)');
+        $("#table-menu").DataTable({
+            "fixedHeader": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columnDefs": [{
+                    "searchable": false,
+                    "targets": 0
+                },
+                {
+                    "searchable": true,
+                    "targets": 1
+                },
+                {
+                    "searchable": false,
+                    "targets": 2
+                },
+                {
+                    "searchable": false,
+                    "targets": 3
+                },
+                {
+                    "searchable": false,
+                    "targets": 3
+                },
             ]
         }).buttons().container().appendTo(' .col-md-6:eq(0)');
     });
@@ -174,8 +202,8 @@ use LearnPhpMvc\Config\Url;
     // }
 </script>
 
-<script src="<?=Url::BaseUrl()?>js/user.js"></script>
-<script src="<?=Url::BaseUrl()?>js/menulatihan.js"></script>
-<script src="<?=Url::BaseUrl()?>js/gerakan.js"></script>
-<script src="<?=Url::BaseUrl()?>js/gerakan2.js"></script>
-<script src="<?=Url::BaseUrl()?>js/alat.js"></script>
+<script src="<?= Url::BaseUrl() ?>js/user.js"></script>
+<script src="<?= Url::BaseUrl() ?>js/menulatihan.js"></script>
+<script src="<?= Url::BaseUrl() ?>js/gerakan.js"></script>
+<script src="<?= Url::BaseUrl() ?>js/gerakan2.js"></script>
+<script src="<?= Url::BaseUrl() ?>js/alat.js"></script>
