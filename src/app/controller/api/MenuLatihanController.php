@@ -25,4 +25,8 @@ class MenuLatihanController{
         $data = json_decode($json);
         echo json_encode($this->service->findRincianMenuLatihan($data));
     }
+    public function addData()
+    {
+        echo json_encode($this->service->addData($_POST,$_FILES));
+    }
 }

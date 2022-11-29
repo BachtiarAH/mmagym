@@ -8,7 +8,7 @@ function getMenuLatihan()
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => Url::BaseUrl().'api/menu/all',
+        CURLOPT_URL => Url::BaseUrl() . 'api/menu/all',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -104,11 +104,11 @@ $dataHtml = JsonToTabel(getMenuLatihan());
                             <th>part</th>
                             <th>level</th>
                             <th>gambar</th>
-                            <th></th>
+                            <th> <button type="button" class="btn btn-primary" data-toggle='modal' data-target='#model_form_menu_add'>add</button> </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?=$dataHtml?>
+                        <?= $dataHtml ?>
                     </tbody>
                 </table>
             </div>
@@ -117,3 +117,48 @@ $dataHtml = JsonToTabel(getMenuLatihan());
         <!-- /.card -->
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="model_form_menu_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Alat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= Url::BaseUrl() ?>menu/add" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="form-name">Nama</label>
+                        <input required type="text" value="" name="nama" class="form-control" id="model-form-name" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Part</label>
+                        <input required type="text" value="" name="part" class="form-control" id="model-form-name" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select required name="level" class="form-control">
+                            <option value=""></option>
+                            <option value="pemula">pemula</option>
+                            <option value="menengah">menengah</option>
+                            <option value="mahir">mahir</option>
+                        </select>
+                    </div>
+                    <label for="form-gambar">Gambar</label>
+                    <div class="custom-file form-group" id="model-container-gambar">
+                        <input type="file" class="custom-file-input" name="foto-menu" id="model-file-alat" accept="image/*" required onchange="setLabelInput(this)">
+                        <label class="custom-file-label" for="customFile" id="model-form-gambar">Gambar</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /.content-header -->

@@ -76,6 +76,7 @@ Router::add('GET','/api/gerakan/all',GerakanController::class,'findAll');
 //api MenuLatihan
 Router::add('GET','/api/menu/all',MenuLatihanController::class,'findAll');
 Router::add('POST','/api/menu/rincian',MenuLatihanController::class,'findRincianMenuLatihan');
+Router::add('POST','/api/menu/add',MenuLatihanController::class,'addData');
 
 //api jadwal
 Router::add('POST','/api/jadwal/user',JadwalController::class,'findByUser');
@@ -107,7 +108,10 @@ Router::add('POST', '/gerakan/add', GerakanControllerView::class, 'addData');
 Router::add('POST', '/gerakan/edit', GerakanControllerView::class, 'edit');
 Router::add('GET', '/gerakan/delete', GerakanControllerView::class, 'delete');
 
+//menu latihan
 Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');
+Router::add('GET', '/menuAdd', MenuLatihanControllerView::class, 'renderAdd');
+Router::add('POST', '/menu/add', MenuLatihanControllerView::class, 'add');
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');
 Router::add('GET', '/company', CompanyController::class, 'bestCompany');

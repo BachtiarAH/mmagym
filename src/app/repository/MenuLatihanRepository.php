@@ -107,7 +107,7 @@ class MenuLatihanRepository
             $sql = "INSERT INTO `menu_latihan`(`nama_menu_latihan`, `part`, `level`, `gambar`) 
             VALUES 
             ('$nama','$part','$level','$gambar')";
-            $stmt = $this->connecetion->prepare($sql);
+            $stmt = $this->connection->prepare($sql);
             $stmt->execute();
             $respons['status'] = 'succes';
             // $respons['respons_code'] = "200";

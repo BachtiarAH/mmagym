@@ -25,4 +25,15 @@ class MenuLatihanService extends Service{
         }
         
     }
+
+    public function addData($post, $file)
+    {
+        if (isset($post['nama']) && isset($post['part']) && isset($post['level']) && isset($file['foto-menu'])) {
+            $idFoto = $this->googleDriveUpload($file,'foto-menu','1cPTSAED5B2OVkXa1bf0Pug1XrMaEha1g');
+            return $this->repo->addData($post['nama'],$post['part'],$post['level'],$idFoto);
+        } else {
+            return $this->FailResponse('format');
+        }
+        
+    }
 }
