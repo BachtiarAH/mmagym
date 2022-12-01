@@ -29,6 +29,7 @@ use LearnPhpMvc\controller\UsersControllerView;
 //api
 
 //auth
+Router::add('POST','/api/auth/login/admin',AuthController::class,'loginAdmin');
 Router::add('POST','/api/auth/login',AuthController::class,'login');
 Router::add('POST','/api/auth/register',AuthController::class,'register');
 Router::add('POST','/api/auth/register/verif',AuthController::class,'verifyOtp');
