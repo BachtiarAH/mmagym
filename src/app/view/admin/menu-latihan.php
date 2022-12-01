@@ -48,7 +48,8 @@ function JsonToTabel($json)
                             <td>
                                 <div class='row'>
                                     <a href=''><i class='fa-solid fa-trash'></i></a>
-                                    <i class='fa-solid fa-pen-to-square col'></i>
+                                    <div><i class='fa-solid fa-pen-to-square col'></i></div>
+                                    <a href='".Url::BaseUrl()."menuAdd?id=$id'><i class='fa-solid fa-list'></i></a>
                                 </div>
                             </td>
                         </tr>

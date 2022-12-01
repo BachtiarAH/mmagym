@@ -25,8 +25,35 @@ class MenuLatihanController{
         $data = json_decode($json);
         echo json_encode($this->service->findRincianMenuLatihan($data));
     }
+    
+    public function findById()
+    {
+        echo json_encode($this->service->findById($_GET));
+    }
+    
     public function addData()
     {
         echo json_encode($this->service->addData($_POST,$_FILES));
+    }
+
+    public function addRician()
+    {
+        $json = file_get_contents('php://input');
+        $request = json_decode($json);
+        echo json_encode($this->service->addRincian($request));
+    }
+    
+    public function deleteDataRincian()
+    {
+        $json = file_get_contents('php://input');
+        $request = json_decode($json);
+        echo json_encode($this->service->deleteDataRincian($request));
+    }
+
+    public function updateDataRincian()
+    {
+        $json = file_get_contents('php://input');
+        $request = json_decode($json);
+        echo json_encode($this->service->EditDataRincian($request));
     }
 }

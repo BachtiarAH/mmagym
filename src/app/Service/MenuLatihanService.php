@@ -36,4 +36,44 @@ class MenuLatihanService extends Service{
         }
         
     }
+
+    public function findById($get)
+    {
+        if (isset($get['id'])) {
+            return $this->repo->findById($get['id']);
+        } else {
+            return $this->FailResponse('format');
+        }
+        
+    }
+
+    public function addRincian($post)
+    {
+        if (isset($post->repetisi) && isset($post->set) && isset($post->note) && isset($post->id_gerakan) && isset($post->id_menu_latihan)) {
+            return $this->repo->addRincian($post->repetisi, $post->set, $post->note, $post->id_gerakan, $post->id_menu_latihan);
+        } else {
+            return $this->FailResponse('format');
+        }
+        
+    }
+
+    public function deleteDataRincian($data)
+    {
+        if (isset($data->id)) {
+            return $this->repo->deleteDataRincian($data->id);
+        } else {
+            return $this->FailResponse('format');
+        }
+        
+    }
+
+    public function EditDataRincian($data)
+    {
+        if (isset($data->id) && isset($data->repetisi) && isset($data->note) && isset($data->set) && isset($data->id_gerakan) ) {
+            return $this->repo->UpdateRincian($data->id,$data->note,$data->set,$data->repetisi,$data->id_gerakan);
+        } else {
+            return $this->FailResponse('format');
+        }
+        
+    }
 }
