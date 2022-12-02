@@ -25,32 +25,45 @@ class AuthService extends Service
             $email = $request->email;
             $password = $request->password;
             $jsonResult = $this->userRepo->findByEmail($email);
-            if ($jsonResult['respons_code'] == 200) {
+            // var_dump($jsonResult == NULL);
+            // var_dump($jsonResult);
+            
+            if (!($jsonResult==NULL)) {
                 $emailResult = $jsonResult['body'][0]['email'];
                 $passwordResult = $jsonResult['body'][0]['password'];
                 $akses = $jsonResult['body'][0]['akses'];
                 // echo $emailResult;
-                if ($email == $emailResult && $password == $passwordResult && $akses == 2) {
-                    return [
-                        'status' => 'login success',
-                        'body' => $jsonResult['body']
-                    ];
-                } else if (isEmpty($jsonResult)) {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'email unregistered'
-                    ];
-                } else if ($akses == 0) {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'email belum di verifikasi'
-                    ];
-                } {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'password is wrong'
-                    ];
+                if ($email == $emailResult) {
+
+                    if ($password == $passwordResult) {
+                        if ($akses == 2) {
+                            return [
+                                'status' => 'login success',
+                                'body' => $jsonResult['body']
+                            ];
+                        } else if ($akses == 1) {
+                            return [
+                                'status' => 'login fail',
+                                'message' => 'akun anda tidak memiliki akses'
+                            ];
+                        } elseif ($akses == 0) {
+                            return [
+                                'status' => 'login fail',
+                                'message' => 'email belum di verifikasi'
+                            ];
+                        }
+                    } else {
+                        return [
+                            'status' => 'login fail',
+                            'message' => 'password salah'
+                        ];
+                    }
                 }
+            } else {
+                return [
+                    'status' => 'login fail',
+                    'message' => 'email belum terdaftar'
+                ];
             }
         } else {
             return [

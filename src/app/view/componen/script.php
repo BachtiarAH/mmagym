@@ -50,50 +50,7 @@ use LearnPhpMvc\Config\Url;
 <!-- font awsome -->
 <script src="https://kit.fontawesome.com/5c43977293.js" crossorigin="anonymous"></script>
 
-<!-- SweetAlert2 -->
-<script src="<?= Url::BaseUrl() ?>AdminLTE-3.2.0/plugins/sweetalert2/sweetalert2.min.js"></script>
 
-<script>
-    $(function() {
-        var Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000
-        });
-
-        $('.swalDefaultSuccess').ready(function() {
-            Toast.fire({
-                icon: 'success',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-        $('.swalDefaultInfo').ready(function() {
-            Toast.fire({
-                icon: 'info',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-        $('.swalDefaultError').ready(function() {
-            Toast.fire({
-                icon: 'error',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-        $('.swalDefaultWarning').ready(function() {
-            Toast.fire({
-                icon: 'warning',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-        $('.swalDefaultQuestion').ready(function() {
-            Toast.fire({
-                icon: 'question',
-                title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-            })
-        });
-    });
-</script>
 
 <script>
     $(document).ready(function() {

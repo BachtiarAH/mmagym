@@ -1,12 +1,20 @@
 <?php
 
 use LearnPhpMvc\APP\View;
-
-if (isset($_POST['submit'])) {
-    header(View::getUrl('/admin'));
-}else {
-    echo "";
+// var_dump($_SESSION);
+// echo "aksdhjf";
+if (isset($_SESSION['fail'])) {
+    $massage = $_SESSION['fail'];
+    echo "<script>
+    Toast.fire({
+        icon: 'error',
+        title: 'login gagal',
+        text: '$massage'
+    })
+</script>";
+    session_unset();
 }
+
 ?>
 
 <div class="hold-transition login-page">
@@ -18,10 +26,9 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-
-                <form action="<?=View::getUrl('/submit/login')?>" method="post">
+                <form action="<?= View::getUrl('/submit/login') ?>" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -36,27 +43,14 @@ if (isset($_POST['submit'])) {
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div>
+                    <div class="">
                         <!-- /.col -->
-                        <div class="col-4">
+                        <div class="d-flex justify-content-around">
                             <button type="submit" class="btn btn-primary btn-block" name="submit" id="submit">Sign In</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
-
-                
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
             </div>
             <!-- /.card-body -->
         </div>

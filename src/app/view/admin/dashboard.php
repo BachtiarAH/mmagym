@@ -1,5 +1,20 @@
 <?php
-echo '<div class="swalDefaultSuccess"></div>';
+
+use LearnPhpMvc\APP\View;
+// var_dump($_SESSION);
+  if (isset($_SESSION['id'])) {
+    $name = $_SESSION['nama'];
+    echo "<script>
+    Toast.fire({
+          icon: 'success',
+          title: 'login success',
+          text: 'hello $name',
+        })
+  </script>";
+  } else {
+    View::redirect('/admin/login');
+  }
+  
 ?>
 
 <!-- Content Header (Page header) -->

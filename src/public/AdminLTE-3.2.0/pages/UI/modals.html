@@ -1319,6 +1319,7 @@
 <script src="../../dist/js/demo.js"></script>
 <!-- Page specific script -->
 <script>
+
   $(function() {
     var Toast = Swal.mixin({
       toast: true,
@@ -1327,7 +1328,7 @@
       timer: 3000
     });
 
-    $('.swalDefaultSuccess').ready(function() {
+    $('.swalDefaultSuccess').click(function() {
       Toast.fire({
         icon: 'success',
         title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
