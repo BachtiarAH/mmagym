@@ -1,20 +1,24 @@
 <?php
+ob_start();
 
 use LearnPhpMvc\APP\View;
 // var_dump($_SESSION);
-  if (isset($_SESSION['id'])) {
+if (isset($_SESSION['id'])) {
+  if ($_SESSION['logedin']) {
     $name = $_SESSION['nama'];
     echo "<script>
-    Toast.fire({
-          icon: 'success',
-          title: 'login success',
-          text: 'hello $name',
-        })
-  </script>";
-  } else {
-    View::redirect('/admin/login');
+      Toast.fire({
+            icon: 'success',
+            title: 'login success',
+            text: 'hello $name',
+          })
+    </script>";
+    $_SESSION['logedin'] = false;
   }
-  
+} else {
+  View::redirect('/admin/login');
+}
+
 ?>
 
 <!-- Content Header (Page header) -->

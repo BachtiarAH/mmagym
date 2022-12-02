@@ -4,10 +4,5 @@ var Toast = Swal.mixin({
     showConfirmButton: false,
     timer: 3000
 });
-Toast.fire({
-    icon: 'success',
-    title: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr.'
-})
 
-// Swal.fire('Any fool can use a computer');
 

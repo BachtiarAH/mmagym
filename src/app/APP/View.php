@@ -30,7 +30,7 @@ class View
     public static function redirect(string $url)
     {
         $baseUrl = Url::BaseUrl();
-        header("location: "."$baseUrl"."$url");
+        header("location:"."$baseUrl"."$url");
         if(getenv('mode') != 'test'){
             exit();
         }

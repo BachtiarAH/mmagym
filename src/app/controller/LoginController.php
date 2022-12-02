@@ -56,6 +56,7 @@ class LoginController
                 $_SESSION['alamat'] = $data->body[0]->alamat;
                 $_SESSION['akses'] = $data->body[0]->akses;
                 $_SESSION['password'] = $data->body[0]->password;
+                $_SESSION['logedin'] = true;
                 var_dump($_SESSION);
                 View::redirect('/admin');
             } else {
