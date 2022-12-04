@@ -107,7 +107,43 @@ use LearnPhpMvc\Config\Url;
                 },
                 {
                     "searchable": false,
+                    "targets": 4
+                },
+            ]
+        }).buttons().container().appendTo(' .col-md-6:eq(0)');
+        $("#table-users").DataTable({
+            "fixedHeader": true,
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "columnDefs": [{
+                    "searchable": false,
+                    "targets": 0
+                },
+                {
+                    "searchable": true,
+                    "targets": 1
+                },
+                {
+                    "searchable": false,
+                    "targets": 2
+                },
+                {
+                    "searchable": false,
                     "targets": 3
+                },
+                {
+                    "searchable": false,
+                    "targets": 4
+                },
+                {
+                    "searchable": false,
+                    "targets": 5
+                },
+                {
+                    "searchable": false,
+                    "targets": 6
                 },
             ]
         }).buttons().container().appendTo(' .col-md-6:eq(0)');
@@ -178,35 +214,6 @@ use LearnPhpMvc\Config\Url;
         var formId = document.getElementById('form-id');
         formId.style.visibility = 'hidden';
     }
-
-
-
-
-    // function searchAlat(searchBar) {
-    //     tabel = document.getElementById('tableAlat');
-    //     console.log(searchBar.value);
-    //     var json = JSON.stringify({
-    //         "name": searchBar.value
-    //     });
-    //     xhttp.open("POST", baseUrl + "/api/alat/findByName", true);
-    //     xhttp.setRequestHeader('Conten-Type', 'aplication/json');
-    //     xhttp.send(json);
-    //     console.log(xhttp.responseText);
-    //     // console.log(id.innerHTML);
-    //     xhttp.onload = function() {
-    //         request = this.responseText;
-    //         data = JSON.parse(request);
-    //         tableHTML = "";
-    //         console.log(data.body);
-    //         for (let index = 0; index < data.body.length; index++) {
-    //             // const element = data.body[index];
-    //             // console.table([data.body[index].id,data.body[index].nama,data.body[index].gambar]);
-    //             tableHTML += "<tr >'<td class='id' onclick='tbClicked()'> " + data.body[index].id + " </td><td class='data-nama' onchange='tes()' contenteditable='false' onclick='tbClicked()'> " + data.body[index].nama + "</td><td class='data-gambar' onchange='tes()' contenteditable='true' onclick='tbClicked()'> " + data.body[index].gambar + "</td><td><i class='fa-solid fa-trash' onclick='deleteAlat()'></i></td></tr>";
-    //         }
-    //         // console.table([data.body.id,data.body.name]);
-    //         tabel.innerHTML = tableHTML;
-    //     }
-    // }
 </script>
 
 <script src="<?= Url::BaseUrl() ?>js/user.js"></script>

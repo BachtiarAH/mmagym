@@ -10,3 +10,5 @@ function setModelForm(even) {
     formId.value = id;
     formName.value = nama;
 }
+
+

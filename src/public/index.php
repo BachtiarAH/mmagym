@@ -107,7 +107,11 @@ Router::add('POST', '/alat/update', AlatControllerView::class, 'update');
 Router::add('POST', '/alat/add', AlatControllerView::class, 'add');
 Router::add('GET', '/alat/delete', AlatControllerView::class, 'delete');
 
+//user
 Router::add('GET', '/user', UsersControllerView::class, 'index');
+Router::add('POST', '/user/add', UsersControllerView::class, 'add');
+Router::add('POST', '/user/edit', UsersControllerView::class, 'edit');
+Router::add('GET', '/user/delete', UsersControllerView::class, 'delete');
 
 //gerakan
 Router::add('GET', '/gerakan', GerakanControllerView::class, 'index');
