@@ -3,7 +3,7 @@
         'name' => 'zam/learn-php-mvc',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'eb2fb24417a70c6b1900a5d5782d844913b2616c',
+        'reference' => 'b1b9bae6a59fbda9b0f68e8a9c4c9c945a8d1355',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -181,6 +181,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'phpfastcache/phpfastcache' => array(
+            'pretty_version' => '9.1.2',
+            'version' => '9.1.2.0',
+            'reference' => '718c022344aec5edbfd06ea25a1aca5c22ce8298',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpfastcache/phpfastcache',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'phpmailer/phpmailer' => array(
             'pretty_version' => 'v6.6.5',
             'version' => '6.6.5.0',
@@ -330,6 +339,15 @@
             'provided' => array(
                 0 => '3.0.0',
             ),
+        ),
+        'psr/simple-cache' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => '764e0b3939f5ca87cb904f570ef9be2d78a07865',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/simple-cache',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'ralouphie/getallheaders' => array(
             'pretty_version' => '3.0.3',
@@ -523,7 +541,7 @@
         'zam/learn-php-mvc' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'eb2fb24417a70c6b1900a5d5782d844913b2616c',
+            'reference' => 'b1b9bae6a59fbda9b0f68e8a9c4c9c945a8d1355',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

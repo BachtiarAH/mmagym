@@ -98,6 +98,8 @@ Router::add('POST', '/submit/login', LoginController::class, 'login');
 
 //admin
 Router::add('GET', '/admin', HomeController::class, 'index');
+Router::add('POST', '/admin', HomeController::class, 'index');
+Router::add('POST', '/admin/editProfil', HomeController::class, 'editDataProfil');
 
 //alat
 Router::add('GET', '/alat', AlatControllerView::class, 'index');

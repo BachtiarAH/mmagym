@@ -119,7 +119,7 @@ function getDataMenu()
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => Url::BaseUrl().'api/menu/id?id='.$_GET['id'],
+        CURLOPT_URL => Url::BaseUrl() . 'api/menu/id?id=' . $_GET['id'],
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -190,15 +190,15 @@ $ArrResponse = json_decode(getData($_GET['id']), true);
         </div>
         <div class="col-4">
             <div class="card">
-                <div class="card-header">tambah rincian</div>
+                <div class="card-header">Menu Latihan</div>
                 <div class="card-body">
                     <label for="form-gambar">Gambar</label>
                     <div class="data-gambar" id="model-container-gambar">
-                        <img src='https://drive.google.com/uc?export=view&id=<?=$dataMenu->body[0]->gambar?>' alt='$gambar' srcset=''></td>
+                        <img src='https://drive.google.com/uc?export=view&id=<?= $dataMenu->body[0]->gambar ?>' alt='$gambar' srcset=''></td>
                     </div>
                     <div class="form-group">
                         <label for="form-name">Nama</label>
-                        <input readonly type="text" value="<?=$dataMenu->body[0]->nama?>" name="nama" class="form-control" id="model-form-name" placeholder="">
+                        <input readonly type="text" value="<?= $dataMenu->body[0]->nama ?>" name="nama" class="form-control" id="model-form-name" placeholder="">
                     </div>
                     <div class="form-group">
                         <label>Part</label>
@@ -208,8 +208,6 @@ $ArrResponse = json_decode(getData($_GET['id']), true);
                         <label>Level</label>
                         <input readonly type="text" value="<?= $dataMenu->body[0]->level ?>" name="part" class="form-control" id="model-form-name" placeholder="">
                     </div>
-
-
                 </div>
             </div>
         </div>

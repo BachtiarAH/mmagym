@@ -6,6 +6,41 @@ use LearnPhpMvc\APP\View;
 use LearnPhpMvc\Config\Url;
 use LearnPhpMvc\controller\HomeController;
 
+function getDataProfil()
+{
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => Url::BaseUrl() . 'api/user/id',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{
+    "id": ' . $_SESSION['id'] . '
+        }',
+        CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json',
+            'Cookie: PHPSESSID=e2ff47h1vu2dndmqdbj7fceqed'
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    return $response;
+}
+
+$dataProfil = json_decode(getDataProfil());
+$nama = $dataProfil->body[0]->nama;
+$email = $dataProfil->body[0]->email;
+$password = $dataProfil->body[0]->password;
+$alamat =$dataProfil->body[0]->alamat;
+$akses = $dataProfil->body[0]->akses;
+
 ?>
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -21,7 +56,7 @@ use LearnPhpMvc\controller\HomeController;
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
 
             <div class="info">
-                <?=$_SESSION['nama']?>
+                <?= $nama ?>
             </div>
         </div>
 

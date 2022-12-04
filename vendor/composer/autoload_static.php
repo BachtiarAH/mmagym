@@ -31,11 +31,14 @@ class ComposerStaticInit01eda7f36794053d74f5c763452fe09a
         ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
             'Prophecy\\' => 9,
+            'Phpfastcache\\Tests\\' => 19,
+            'Phpfastcache\\' => 13,
             'PhpParser\\' => 10,
             'ParagonIE\\ConstantTime\\' => 23,
             'PHPMailer\\PHPMailer\\' => 20,
@@ -83,6 +86,10 @@ class ComposerStaticInit01eda7f36794053d74f5c763452fe09a
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
@@ -103,6 +110,14 @@ class ComposerStaticInit01eda7f36794053d74f5c763452fe09a
         'Prophecy\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
+        'Phpfastcache\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpfastcache/phpfastcache/tests/lib',
+        ),
+        'Phpfastcache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpfastcache/phpfastcache/lib/Phpfastcache',
         ),
         'PhpParser\\' => 
         array (
