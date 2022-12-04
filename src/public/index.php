@@ -78,6 +78,9 @@ Router::add('GET','/api/gerakan/all',GerakanController::class,'findAll');
 Router::add('GET','/api/menu/all',MenuLatihanController::class,'findAll');
 Router::add('POST','/api/menu/rincian',MenuLatihanController::class,'findRincianMenuLatihan');
 Router::add('POST','/api/menu/add',MenuLatihanController::class,'addData');
+Router::add('POST','/api/menu/update',MenuLatihanController::class,'editData');
+Router::add('POST','/api/menu/updateNoFot',MenuLatihanController::class,'editNoGambar');
+Router::add('POST','/api/menu/delete',MenuLatihanController::class,'deleteData');
 Router::add('POST','/api/menu/add/rincian',MenuLatihanController::class,'addRician');
 Router::add('POST','/api/menu/delete/rincian',MenuLatihanController::class,'deleteDataRincian');
 Router::add('POST','/api/menu/update/rincian',MenuLatihanController::class,'updateDataRincian');
@@ -121,10 +124,12 @@ Router::add('GET', '/gerakan/delete', GerakanControllerView::class, 'delete');
 
 //menu latihan
 Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');
+Router::add('GET', '/menu/delete', MenuLatihanControllerView::class, 'deletData');
 Router::add('GET', '/menuAdd', MenuLatihanControllerView::class, 'renderAdd');
 Router::add('GET', '/menuAdd/delete', MenuLatihanControllerView::class, 'deleteRincian');
 Router::add('POST', '/menuAdd/edit', MenuLatihanControllerView::class, 'editRincian');
 Router::add('POST', '/menu/add', MenuLatihanControllerView::class, 'add');
+Router::add('POST', '/menu/edit', MenuLatihanControllerView::class, 'edit');
 Router::add('POST', '/menu/add/rincian', MenuLatihanControllerView::class, 'rincianMenuAdd');
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');

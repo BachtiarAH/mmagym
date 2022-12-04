@@ -36,6 +36,25 @@ class MenuLatihanController{
         echo json_encode($this->service->addData($_POST,$_FILES));
     }
 
+    public function editData()
+    {
+        echo json_encode($this->service->editData($_POST,$_FILES));
+    }
+
+    public function editNoGambar()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json,true);
+        echo json_encode($this->service->editDataNoFOto($data));
+    }
+
+    public function deleteData()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->deleteData($data));
+    }
+
     public function addRician()
     {
         $json = file_get_contents('php://input');

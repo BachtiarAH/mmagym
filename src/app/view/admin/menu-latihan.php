@@ -2,6 +2,29 @@
 
 use LearnPhpMvc\Config\Url;
 
+if (isset($_SESSION['notification'])) {
+    $title = $_SESSION['notification']['title'];
+    $text = $_SESSION['notification']['text'];
+    if ($_SESSION['notification']['status']) {
+        echo "<script>
+        Toast.fire({
+            icon: 'success',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    } else {
+        echo "<script>
+        Toast.fire({
+            icon: 'error',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    }
+}
 
 function getMenuLatihan()
 {
@@ -47,8 +70,9 @@ function JsonToTabel($json)
                             <td>$gambar</td>
                             <td>
                                 <div class='row'>
-                                    <a href=''><i class='fa-solid fa-trash'></i></a>
-                                    <div><i class='fa-solid fa-pen-to-square col'></i></div>
+                                    <a href='".Url::BaseUrl()."menu/delete?id=$id'><i class='fa-solid fa-trash'></i></a>
+                                    <div data-toggle='modal' data-target='#model_form_menu_edit' 
+                                    data-id='$id' data-nama='$nama' data-part='$part' data-level='$level' onclick='setModalMenuEdit(this)'><i class='fa-solid fa-pen-to-square col' ></i></div>
                                     <a href='".Url::BaseUrl()."menuAdd?id=$id'><i class='fa-solid fa-list'></i></a>
                                 </div>
                             </td>
@@ -152,6 +176,50 @@ $dataHtml = JsonToTabel(getMenuLatihan());
                     <div class="custom-file form-group" id="model-container-gambar">
                         <input type="file" class="custom-file-input" name="foto-menu" id="model-file-alat" accept="image/*" required onchange="setLabelInput(this)">
                         <label class="custom-file-label" for="customFile" id="model-form-gambar">Gambar</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="model_form_menu_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Alat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= Url::BaseUrl() ?>menu/edit" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <input type="text" name="id" id="model-form-id-edit">
+                    <div class="form-group">
+                        <label for="form-name">Nama</label>
+                        <input required type="text" value="" name="nama" class="form-control" id="model-form-name-edit" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Part</label>
+                        <input required type="text" value="" name="part" class="form-control" id="model-form-part-edit" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select required name="level" class="form-control" id="model-form-level-edit">
+                            <option value=""></option>
+                            <option value="pemula">pemula</option>
+                            <option value="menengah">menengah</option>
+                            <option value="mahir">mahir</option>
+                        </select>
+                    </div>
+                    <label for="form-gambar">Gambar</label>
+                    <div class="custom-file form-group" id="model-container-gambar">
+                        <input type="file" class="custom-file-input" name="foto-menu" id="model-file-menu-edit" accept="image/*" onchange="setLabelInput(this)">
+                        <label class="custom-file-label" for="customFile" id="model-form-gambar">Gambaras</label>
                     </div>
                 </div>
                 <div class="modal-footer">
