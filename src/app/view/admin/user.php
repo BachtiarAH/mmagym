@@ -206,7 +206,7 @@ $dataHtml = JsonToTabel($responseJson);
                 </div>
                 <form action="<?= Url::BaseUrl() ?>user/edit" method="post">
                     <div class="modal-body">
-                        <input type="text" value="" name="id" id="modal-form-id">
+                        <input type="text" value="" name="id" id="modal-form-id" hidden>
                         <div class="form-group">
                             <label for="exampleInputEmail1">Nama</label>
                             <input type="text" class="form-control" id="modal-form-nama" name="nama" required placeholder="Enter email">
