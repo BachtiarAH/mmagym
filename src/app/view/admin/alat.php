@@ -7,6 +7,30 @@ $result = $api->get("/api/alat/findAll", ['q' => "#php"]);
 // var_dump($result->response);
 $dataJson = $result->response;
 
+if (isset($_SESSION['notification'])) {
+    $title = $_SESSION['notification']['title'];
+    $text = $_SESSION['notification']['text'];
+    if ($_SESSION['notification']['status']) {
+        echo "<script>
+        Toast.fire({
+            icon: 'success',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    } else {
+        echo "<script>
+        Toast.fire({
+            icon: 'error',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    }
+}
+
 function JsonToTabel($json)
 {
     $html = '';
@@ -111,11 +135,11 @@ $dataHtml = JsonToTabel($dataJson);
                     <div class="card-body">
                         <div class="form-group">
                             <label for="form-name">Nama</label>
-                            <input type="text" value="" name="nama" class="form-control" id="form-name" placeholder="">
+                            <input required type="text" value="" name="nama" class="form-control" id="form-name" placeholder="">
                         </div>
                         <label for="form-gambar">Gambar</label>
                         <div class="custom-file form-group">
-                            <input type="file" class="custom-file-input" name="foto-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
+                            <input required type="file" class="custom-file-input" name="foto-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
                             <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
                         </div>
                     </div>

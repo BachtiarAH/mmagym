@@ -22,7 +22,8 @@ class AlatControllerView
 
     public function update()
     {
-        if (isEmpty($_FILES['foto-alat']['tmp_name'])!="") {
+        session_start();
+        if ($_FILES['foto-alat']['tmp_name'] != "") {
             $curl = curl_init();
             $apiEndPoin = 'api/alat/edit';
             $fileDir = $_FILES['foto-alat']['tmp_name'];
@@ -44,8 +45,22 @@ class AlatControllerView
             $response = curl_exec($curl);
             curl_close($curl);
             if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-                // echo $response;
-                header("location:" . url::BaseUrl() . 'alat');
+                $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'edit data berhasil',
+                        'text' => "alat dengan id $id berhasil diedit"
+                    ];
+                    View::redirect('alat');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'edit data gagal',
+                        'text' => "alat dengan email $id gagal diedit"
+                    ];
+                    View::redirect('alat');
+                }
             } else {
                 echo $response;
             }
@@ -76,15 +91,33 @@ class AlatControllerView
 
             curl_close($curl);
             if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-                header("location:" . url::BaseUrl() . 'alat');
+                $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'edit data berhasil',
+                        'text' => "alat dengan id $id berhasil diedit"
+                    ];
+                    View::redirect('alat');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'edit data gagal',
+                        'text' => "alat dengan email $id gagal diedit"
+                    ];
+                    View::redirect('alat');
+                }
             } else {
                 echo $response;
             }
         }
     }
 
+
+
     public function add()
     {
+        session_start();
         $curl = curl_init();
         $nama = $_POST['nama'];
         $pathfoto = $_FILES['foto-alat']['tmp_name'];
@@ -106,7 +139,22 @@ class AlatControllerView
         curl_close($curl);
         echo $response;
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-            header("location:" . url::BaseUrl() . 'alat');
+            $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'tambah data berhasil',
+                        'text' => "alat dengan nama $nama berhasil ditambah"
+                    ];
+                    View::redirect('alat');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'tambah data gagal',
+                        'text' => "alat dengan nama $nama gagal ditambah"
+                    ];
+                    View::redirect('alat');
+                }
         } else {
             echo $response;
         }
@@ -114,11 +162,12 @@ class AlatControllerView
 
     public function delete()
     {
+        session_start();
         $curl = curl_init();
         $id = $_GET['id'];
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => url::BaseUrl().'/api/alat/delet',
+            CURLOPT_URL => url::BaseUrl() . '/api/alat/delet',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -127,7 +176,7 @@ class AlatControllerView
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => '{
-                    "id":"'.$id.'"
+                    "id":"' . $id . '"
                     }',
             CURLOPT_HTTPHEADER => array(
                 'Content-Type: application/json'
@@ -138,7 +187,22 @@ class AlatControllerView
 
         curl_close($curl);
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-            header("location:" . url::BaseUrl() . 'alat');
+            $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'hapus data berhasil',
+                        'text' => "alat dengan id $id berhasil dihapus"
+                    ];
+                    View::redirect('alat');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'hapus data gagal',
+                        'text' => "alat dengan id $id gagal dihapus"
+                    ];
+                    View::redirect('alat');
+                }
         } else {
             echo $response;
         }
