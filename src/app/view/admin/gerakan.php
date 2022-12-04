@@ -6,6 +6,30 @@ $result = $api->get("/api/gerakan/all", ['q' => "#php"]);
 // var_dump($result->response);
 $dataJson = $result->response;
 
+if (isset($_SESSION['notification'])) {
+    $title = $_SESSION['notification']['title'];
+    $text = $_SESSION['notification']['text'];
+    if ($_SESSION['notification']['status']) {
+        echo "<script>
+        Toast.fire({
+            icon: 'success',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    } else {
+        echo "<script>
+        Toast.fire({
+            icon: 'error',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    }
+}
+
 function getalat()
 {
     $curl = curl_init();
@@ -259,3 +283,4 @@ $alatHtml = jsonToOption(getalat());
         </div>
     </div>
 </div>
+
