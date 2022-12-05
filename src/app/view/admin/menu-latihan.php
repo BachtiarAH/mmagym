@@ -67,7 +67,7 @@ function JsonToTabel($json)
                             <td>$nama</td>
                             <td>$part</td>
                             <td>$level</td>
-                            <td>$gambar</td>
+                            <td class='data-gambar'><img src='https://drive.google.com/uc?export=view&id=$gambar' alt='$gambar' srcset=''></td>
                             <td>
                                 <div class='row'>
                                     <i data-hapus='".url::BaseUrl()."/menu/delete?id=$id' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash'></i>
