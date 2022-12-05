@@ -80,9 +80,7 @@ function JsonToTabel($json)
                     <td class='data-nama'  > $set</td>
                     <td>
                         <div class='row'>
-                            <a href='" . Url::BaseUrl() . "menuAdd/delete?id=$id&id_menu=$id_menu'>
-                                <i class='fa-solid fa-trash col' data-id='$id'></i>
-                            </a>
+                        <i data-hapus='".url::BaseUrl()."menuAdd/delete?id=$id&id_menu=$id_menu' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash col' data-id='$id'></i>
                             <i data-toggle='modal' data-target='#modal-edit-detail-menu' class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat' data-id='$id' data-nama='$nama' data-id-gerakan='$idGerakan' data-note='$note' data-repetisi='$repetisi' data-set='$set' onclick='setModalData(this)'></i>
                         </div>
                     </td>
@@ -320,4 +318,27 @@ $ArrResponse = json_decode(getData($_GET['id']), true);
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="model_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Apakah and yakin ingin menghapus item ini?</p>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                    <a href="" id="link-delete">
+                    <button type="button" class="btn btn-danger">iya</button>
+                    </a>
+                </div>
+        </div>
+    </div>
 </div>

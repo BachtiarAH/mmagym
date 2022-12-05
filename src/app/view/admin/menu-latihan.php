@@ -70,7 +70,7 @@ function JsonToTabel($json)
                             <td>$gambar</td>
                             <td>
                                 <div class='row'>
-                                    <a href='".Url::BaseUrl()."menu/delete?id=$id'><i class='fa-solid fa-trash'></i></a>
+                                    <i data-hapus='".url::BaseUrl()."/menu/delete?id=$id' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash'></i>
                                     <div data-toggle='modal' data-target='#model_form_menu_edit' 
                                     data-id='$id' data-nama='$nama' data-part='$part' data-level='$level' onclick='setModalMenuEdit(this)'><i class='fa-solid fa-pen-to-square col' ></i></div>
                                     <a href='".Url::BaseUrl()."menuAdd?id=$id'><i class='fa-solid fa-list'></i></a>
@@ -231,3 +231,26 @@ $dataHtml = JsonToTabel(getMenuLatihan());
     </div>
 </div>
 <!-- /.content-header -->
+
+<!-- Modal -->
+<div class="modal fade" id="model_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Apakah and yakin ingin menghapus item ini?</p>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                    <a href="" id="link-delete">
+                    <button type="button" class="btn btn-danger">iya</button>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div>

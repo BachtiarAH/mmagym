@@ -11,4 +11,11 @@ function setModelForm(even) {
     formName.value = nama;
 }
 
+function setLinkALatDelete(even) {
+    link = even.getAttribute('data-hapus');
+    tombolModal = document.getElementById('link-delete');
+    tombolModal.href = link;
+    console.log(link);
+}
+
 
