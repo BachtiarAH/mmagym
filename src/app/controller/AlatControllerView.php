@@ -12,7 +12,9 @@ class AlatControllerView
 {
     protected $model = [
         'title' => "MMA GYM",
-        'content' => "Login"
+        'content' => "Login",
+        'aktif'=>'inventory',
+        'inventory'=>'alat'
     ];
 
     public function index()

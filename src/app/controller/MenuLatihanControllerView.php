@@ -10,7 +10,9 @@ class MenuLatihanControllerView
 {
     protected $model = [
         'title' => "MMA GYM",
-        'content' => "Login"
+        'content' => "Login",
+        'aktif'=>'inventory',
+        'inventory'=>'menu'
     ];
 
     public function index()

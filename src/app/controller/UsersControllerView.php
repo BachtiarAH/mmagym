@@ -9,7 +9,8 @@ class UsersControllerView
 {
     protected $model = [
         'title' => "MMA GYM",
-        'content' => "Login"
+        'content' => "Login",
+        'aktif'=>'acount'
     ];
     public function index()
     {

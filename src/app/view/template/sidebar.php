@@ -38,10 +38,47 @@ $dataProfil = json_decode(getDataProfil());
 $nama = $dataProfil->body[0]->nama;
 $email = $dataProfil->body[0]->email;
 $password = $dataProfil->body[0]->password;
-$alamat =$dataProfil->body[0]->alamat;
+$alamat = $dataProfil->body[0]->alamat;
 $akses = $dataProfil->body[0]->akses;
 
+$dashboard = '';
+$acount = '';
+$inventory = '';
+$alat = '';
+$gerakan = '';
+$menu = '';
+
+switch ($model['aktif']) {
+    case 'dashboard':
+        $dashboard = 'active';
+        break;
+    case 'acount':
+        $acount = 'active';
+        break;
+    case 'inventory':
+        $inventory = 'active';
+        switch ($model['inventory']) {
+            case 'alat':
+                $alat = 'active';
+                break;
+            case 'gerakan':
+                $gerakan = 'active';
+                break;
+            case 'menu':
+                $menu = 'active';
+                break;
+            default:
+                # code...
+                break;
+        }
+        break;
+    default:
+        break;
+}
+
+
 ?>
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -65,7 +102,7 @@ $akses = $dataProfil->body[0]->akses;
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="<?= View::getUrl('admin') ?>" class="nav-link active">
+                    <a id="dashboard" href="<?= View::getUrl('admin') ?>" class="nav-link <?= $dashboard ?>">
                         <iconify-icon class="nav-icon fas " icon="carbon:dashboard-reference"></iconify-icon>
                         <p>
                             Dashboard
@@ -73,7 +110,7 @@ $akses = $dataProfil->body[0]->akses;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= View::getUrl('user') ?>" class="nav-link">
+                    <a id="acount" href="<?= View::getUrl('user') ?>" class="nav-link <?= $acount ?>">
                         <iconify-icon class="nav-icon fas " icon="charm:people"></iconify-icon>
                         <p>
                             Acounts
@@ -81,29 +118,28 @@ $akses = $dataProfil->body[0]->akses;
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a id="inventory" href="" class="nav-link <?= $inventory ?>">
                         <iconify-icon class="nav-icon fas" icon="ion:file-tray-stacked"></iconify-icon>
                         <p>
-
                             Inventroy
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="<?= View::getUrl('alat') ?>" class="nav-link">
+                            <a href="<?= View::getUrl('alat') ?>" class="nav-link <?=$alat?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Alat</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= View::getUrl('gerakan') ?>" class="nav-link">
+                            <a href="<?= View::getUrl('gerakan') ?>" class="nav-link <?=$gerakan?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Gerakan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?= View::getUrl('menu') ?>" class="nav-link">
+                            <a href="<?= View::getUrl('menu') ?>" class="nav-link <?=$menu?>">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Menu Latihan</p>
                             </a>

@@ -9,7 +9,8 @@ class HomeController
 {
     protected $model = [
         'title' => "MMA GYM",
-        'content' => "Login"
+        'content' => "Login",
+        'aktif'=>'dashboard'
     ];
 
     public function index()

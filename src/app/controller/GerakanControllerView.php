@@ -13,7 +13,9 @@ class GerakanControllerView
 {
     protected $model = [
         'title' => "MMA GYM",
-        'content' => "Login"
+        'content' => "Login",
+        'aktif'=>'inventory',
+        'inventory'=>'gerakan'
     ];
 
     public function index()
