@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2022 at 04:07 AM
+-- Generation Time: Dec 07, 2022 at 09:26 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,7 @@ CREATE TABLE `alat` (
 INSERT INTO `alat` (`id_alat`, `nama_alat`, `gambar`) VALUES
 (2, 'tread mil', 'success'),
 (3, 'resistan-belt', 'resistan-belt.jpg'),
-(23, 'dummbell', '1YV2CYs8AX7ZgQFMCyfGuzEGfcnVdqxUD'),
+(23, 'dummbella', '1YV2CYs8AX7ZgQFMCyfGuzEGfcnVdqxUD'),
 (24, 'benchpress', '1dLsl3IcBgAHenj3bshRk_oxKGT8lQF-Z'),
 (26, 'treadmil', '15UH3hBG_-hVcXL4ptN3djlMXKA_3jvKk');
 
@@ -63,10 +63,9 @@ CREATE TABLE `gerakan` (
 --
 
 INSERT INTO `gerakan` (`id_gerakan`, `nama_gerakan`, `video`, `gambar`, `id_alat`) VALUES
-(1, 'lari', 'lari.mp4', 'lari.jpg', 2),
-(5, 'gerakan', 'gerakan.mp4', 'gerakan.jpg', 3),
-(6, 'tes api', '1gG0kHiI0Sbo4mNKMDJoO6Cw6-1mCmwYg', '', 23),
-(7, 'tes api 2', '10KkWKYQroXMlTIILn1c0gEiwgUn0_2mt', '1R33ilG0YAXAT5yBLC7EcGhUBY5a8T2ZF', 23);
+(1, 'lari', '1_t6r_wfZrKn_D5hy2NyxQh0REKyowbLI', '1reSkNZHny6iXhdV-ZlhSz5Y3qsPMQm0O', 2),
+(5, 'gerakan', '1kq7SuewPzFwDRARgtGbOiapbT2_sfayd', '10Br6JpOq-hY-kJEkA7wz3bAkNP3Q7Q2i', 3),
+(6, 'tes api data with video', '1kkccBLQQYvItAyyR5UVg1dtRFSswdls2', '1UkIqnrBXH3hkoWEOCU5vPadNwUYV3PzB', 2);
 
 -- --------------------------------------------------------
 
@@ -77,18 +76,21 @@ INSERT INTO `gerakan` (`id_gerakan`, `nama_gerakan`, `video`, `gambar`, `id_alat
 CREATE TABLE `gerakan_menu` (
   `repetisi` int(11) NOT NULL,
   `setlatihan` int(11) NOT NULL,
-  `note` varchar(20) NOT NULL,
+  `note` varchar(20) CHARACTER SET utf8mb4 NOT NULL,
+  `id_rincian_latihan` int(11) NOT NULL,
   `id_gerakan` int(11) NOT NULL,
   `id_menu_latihan` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `gerakan_menu`
 --
 
-INSERT INTO `gerakan_menu` (`repetisi`, `setlatihan`, `note`, `id_gerakan`, `id_menu_latihan`) VALUES
-(1, 1, '1 kilometer', 1, 1),
-(1, 1, 'menit', 5, 1);
+INSERT INTO `gerakan_menu` (`repetisi`, `setlatihan`, `note`, `id_rincian_latihan`, `id_gerakan`, `id_menu_latihan`) VALUES
+(1, 1, '1 kilometer', 1, 1, 1),
+(1, 1, '60 menit', 2, 5, 1),
+(10, 2, 'tes catatatn', 3, 6, 1),
+(2, 1, 'edit note tes', 6, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -131,8 +133,11 @@ CREATE TABLE `menu_latihan` (
 --
 
 INSERT INTO `menu_latihan` (`id_menu_latihan`, `nama_menu_latihan`, `part`, `level`, `gambar`) VALUES
-(1, 'contoh data', 'badan', 'beginer', 'contoh.jpg'),
-(2, 'contoh data 2', 'seluruh ba', 'beginer', 'contoh2.jpg');
+(1, 'contoh data', 'badan', 'beginer', '1Zuh2SDSzsjmmn8rMawJ6iHxMJxfCE2B_'),
+(2, 'contoh data 2', 'seluruh ba', 'beginer', 'contoh2.jpg'),
+(3, 'tes api', 'badan', 'pemula', '1AkyfvQwiIyXNOXrtk9FHA5e9H9gD1i8v'),
+(4, 'Ruth Britt', 'Yvonne Cru', 'menengah', '1Co3Yv0g9qsXW_kxWLq4RY5EiqamZ6riB'),
+(5, 'Kelly Mcleod', 'Freya Reye', 'menengah', '1ChW5n3RWl7Q3EeAdiBFY6VagWatC1wha');
 
 -- --------------------------------------------------------
 
@@ -150,7 +155,9 @@ CREATE TABLE `otp` (
 --
 
 INSERT INTO `otp` (`email`, `otp`) VALUES
-('coba@coab.cob', 8590);
+('coba@coab.cob', 8590),
+('bachtiarah73@gmal.com', 3506),
+('fuuigsi', 6831);
 
 -- --------------------------------------------------------
 
@@ -193,11 +200,12 @@ CREATE TABLE `usermma` (
 --
 
 INSERT INTO `usermma` (`id`, `nama`, `password`, `email`, `Alamat`, `akses`) VALUES
-(1, 'Bachtiar Arya Habibie', '1234', 'bachtiar@mma.gym', 'Jember', 1),
+(1, 'Bachtiar Arya Habibie', '12344321', 'bachtiar@mma.gym', 'jln belitung no 17 kecamatan Sumbersari Kabupaten Jember', 2),
 (2, 'Syarafina Khalishah', '170903', 'syarafina17@gmail.com', 'Bondowoso', 1),
 (4, 'Nugroho Jeri', 'qwerty', 'jeri@nug.com', 'Pacitan', 2),
 (5, 'coba', 'qwer', 'coba@coab.cob', 'jember', 0),
-(6, 'bachtiar', 'bachtiar', 'bachtiarah73@gmail.com', 'jember', 1);
+(6, 'bachtiar', 'bachtiar', 'bachtiarah73@gmail.com', 'jember', 1),
+(14, 'Suscip', 'Pa$$w0rd!', 'xakoku@mailinator.com', 'Molestiae in amet o', 1);
 
 --
 -- Indexes for dumped tables
@@ -220,8 +228,9 @@ ALTER TABLE `gerakan`
 -- Indexes for table `gerakan_menu`
 --
 ALTER TABLE `gerakan_menu`
-  ADD PRIMARY KEY (`id_gerakan`,`id_menu_latihan`),
-  ADD KEY `id_menu_latihan` (`id_menu_latihan`);
+  ADD PRIMARY KEY (`id_rincian_latihan`),
+  ADD KEY `tes` (`id_gerakan`),
+  ADD KEY `tes2` (`id_menu_latihan`);
 
 --
 -- Indexes for table `jadwal_latihan`
@@ -258,13 +267,19 @@ ALTER TABLE `usermma`
 -- AUTO_INCREMENT for table `alat`
 --
 ALTER TABLE `alat`
-  MODIFY `id_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_alat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `gerakan`
 --
 ALTER TABLE `gerakan`
-  MODIFY `id_gerakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_gerakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `gerakan_menu`
+--
+ALTER TABLE `gerakan_menu`
+  MODIFY `id_rincian_latihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `jadwal_latihan`
@@ -276,13 +291,13 @@ ALTER TABLE `jadwal_latihan`
 -- AUTO_INCREMENT for table `menu_latihan`
 --
 ALTER TABLE `menu_latihan`
-  MODIFY `id_menu_latihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_menu_latihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `usermma`
 --
 ALTER TABLE `usermma`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -298,8 +313,8 @@ ALTER TABLE `gerakan`
 -- Constraints for table `gerakan_menu`
 --
 ALTER TABLE `gerakan_menu`
-  ADD CONSTRAINT `gerakan_menu_ibfk_1` FOREIGN KEY (`id_gerakan`) REFERENCES `gerakan` (`id_gerakan`),
-  ADD CONSTRAINT `gerakan_menu_ibfk_2` FOREIGN KEY (`id_menu_latihan`) REFERENCES `menu_latihan` (`id_menu_latihan`);
+  ADD CONSTRAINT `gerakan_menu_ibfk_1` FOREIGN KEY (`id_gerakan`) REFERENCES `gerakan` (`id_gerakan`) ON DELETE CASCADE,
+  ADD CONSTRAINT `gerakan_menu_ibfk_2` FOREIGN KEY (`id_menu_latihan`) REFERENCES `menu_latihan` (`id_menu_latihan`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `jadwal_latihan`
