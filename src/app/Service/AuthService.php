@@ -110,6 +110,11 @@ class AuthService extends Service
                         'message' => 'email tidak terdaftar'
                     ];
                 }
+            }else {
+                return [
+                    'status' => 'login fail',
+                    'message' => 'email tidak terdaftar'
+                ];
             }
         } else {
             return [
