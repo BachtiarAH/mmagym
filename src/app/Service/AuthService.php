@@ -84,25 +84,30 @@ class AuthService extends Service
                 $passwordResult = $jsonResult['body'][0]['password'];
                 $akses = $jsonResult['body'][0]['akses'];
                 // echo $emailResult;
-                if ($email == $emailResult && $password == $passwordResult && $akses != 0) {
-                    return [
-                        'status' => 'login success',
-                        'body' => $jsonResult['body']
-                    ];
-                } else if (isEmpty($jsonResult)) {
+                if ($email == $emailResult) {
+                    if ($password == $passwordResult) {
+                        if ($akses > 0) {
+                            return [
+                                'status' => 'login success',
+                                'body' => $jsonResult['body']
+                            ];
+                        }else {
+                            return [
+                                'status' => 'fail',
+                                'message' => 'email belum diverifikasi'
+                            ];
+                        }
+                        
+                    } else {
+                        return [
+                            'status' => 'fail',
+                            'message' => 'password salah'
+                        ];
+                    }
+                } else {
                     return [
                         'status' => 'login fail',
-                        'message' => 'email unregistered'
-                    ];
-                } else if ($akses == 0) {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'email belum di verifikasi'
-                    ];
-                } {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'password is wrong'
+                        'message' => 'email tidak terdaftar'
                     ];
                 }
             }
