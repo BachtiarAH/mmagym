@@ -3,17 +3,43 @@
 use LearnPhpMvc\APP\View;
 // var_dump($_SESSION);
 // echo "aksdhjf";
+// session_start();
+// var_dump($_SESSION);
 if (isset($_SESSION['fail'])) {
     $massage = $_SESSION['fail'];
     echo "<script>
-    Toast.fire({
-        icon: 'error',
-        title: 'login gagal',
-        text: '$massage'
-    })
-</script>";
+        Toast.fire({
+            icon: 'error',
+            title: 'login gagal',
+            text: '$massage',
+            })
+    </script>";;
     session_unset();
 }
+
+// if (isset($_SESSION['notification'])) {
+//     $title = $_SESSION['notification']['title'];
+//     $text = $_SESSION['notification']['text'];
+//     if ($_SESSION['notification']['status']) {
+//         echo "<script>
+//         Toast.fire({
+//             icon: 'success',
+//             title: '$title',
+//             text: '$text',
+//             })
+//     </script>";
+//         unset($_SESSION['notification']);
+//     } else {
+//         echo "<script>
+//         Toast.fire({
+//             icon: 'error',
+//             title: '$title',
+//             text: '$text',
+//             })
+//     </script>";
+//         unset($_SESSION['notification']);
+//     }
+// }
 
 ?>
 

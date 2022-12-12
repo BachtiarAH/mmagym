@@ -98,6 +98,7 @@ Router::add('POST','/api/riwayat/user',RiwayatController::class,'findRiwayatGera
 Router::add('GET', '/admin/login', LoginController::class, 'index');
 Router::add('GET', '/', LandingPageController::class, 'index');
 Router::add('POST', '/submit/login', LoginController::class, 'login');
+Router::add('GET', '/logout', LoginController::class, 'logOut');
 
 //admin
 Router::add('GET', '/admin', HomeController::class, 'index');

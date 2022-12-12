@@ -28,7 +28,7 @@ class AuthService extends Service
             // var_dump($jsonResult == NULL);
             // var_dump($jsonResult);
             
-            if (!($jsonResult==NULL)) {
+            if (isset($jsonResult['body'][0])) {
                 $emailResult = $jsonResult['body'][0]['email'];
                 $passwordResult = $jsonResult['body'][0]['password'];
                 $akses = $jsonResult['body'][0]['akses'];
@@ -39,7 +39,8 @@ class AuthService extends Service
                         if ($akses == 2) {
                             return [
                                 'status' => 'login success',
-                                'body' => $jsonResult['body']
+                                'body' => $jsonResult['body'],
+                                'message' => 'login success'
                             ];
                         } else if ($akses == 1) {
                             return [
@@ -89,7 +90,8 @@ class AuthService extends Service
                         if ($akses > 0) {
                             return [
                                 'status' => 'login success',
-                                'body' => $jsonResult['body']
+                                'body' => $jsonResult['body'],
+                                'message' => 'login success'
                             ];
                         }else {
                             return [

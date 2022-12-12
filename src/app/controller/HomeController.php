@@ -28,6 +28,8 @@ class HomeController
         // View::redirect("");
     }
 
+
+
     public function editDataProfil()
     {
         session_start();

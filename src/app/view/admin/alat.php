@@ -45,7 +45,7 @@ function JsonToTabel($json)
 
                 $html .= "
                 <tr>
-                    <td class='id' onclick='tbClicked()'> $id </td>
+                ]                    <td class='id' onclick='tbClicked()'> $id </td>
                     <td class='data-nama'  > $nama</td>
                     <td class='data-gambar' '> <img src='https://drive.google.com/uc?export=view&id=$gambar' alt='$gambar' srcset=''></td>
                     <td>
@@ -62,7 +62,6 @@ function JsonToTabel($json)
 
     return $html;
 }
-
 
 $dataHtml = JsonToTabel($dataJson);
 // var_dump($dataHtml);

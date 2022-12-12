@@ -18,6 +18,13 @@ class LoginController
         // View::redirect("");
     }
 
+    public function logOut()
+    {
+        session_start();
+        session_destroy();
+        View::redirect('/admin/login');
+    }    
+
     public function login()
     {
         $curl = curl_init();
@@ -65,7 +72,7 @@ class LoginController
             }
         } else {
             echo $response;
-            $_SESSION['fail'] = $data->massage;
+            $_SESSION['fail'] = $response;
             View::redirect('/admin/login');
         }
 
