@@ -1,17 +1,16 @@
 <?php
 
 use LearnPhpMvc\APP\View;
-// var_dump($_SESSION);
-// echo "aksdhjf";
-// session_start();
-// var_dump($_SESSION);
 if (isset($_SESSION['fail'])) {
+    echo '<div hidden>';
+    var_dump($_SESSION);
+    echo '</div>';
     $massage = $_SESSION['fail'];
     echo "<script>
         Toast.fire({
             icon: 'error',
             title: 'login gagal',
-            text: '$massage',
+            text: ' $massage',
             })
     </script>";;
     session_unset();
