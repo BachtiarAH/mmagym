@@ -96,6 +96,7 @@ class AuthService extends Service
                         }else {
                             return [
                                 'status' => 'fail',
+                                'body' => "",
                                 'message' => 'email belum diverifikasi'
                             ];
                         }
@@ -103,24 +104,28 @@ class AuthService extends Service
                     } else {
                         return [
                             'status' => 'fail',
+                            'body' => "",
                             'message' => 'password salah'
                         ];
                     }
                 } else {
                     return [
                         'status' => 'login fail',
+                        'body' => "",
                         'message' => 'email tidak terdaftar'
                     ];
                 }
             }else {
                 return [
                     'status' => 'login fail',
+                    'body' => "",
                     'message' => 'email tidak terdaftar'
                 ];
             }
         } else {
             return [
                 'status' => 'fail',
+                'body' => "",
                 'message' => 'format json kalah'
             ];
         }
