@@ -14,3 +14,26 @@
 .facebook{
     background-color: #0165E1;
 }
+
+.qr-code-container{
+    display: flex;
+    border-radius: 10%;
+    background-color: #7c7c7c33;
+    width: fit-content;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10%;
+    margin: auto;
+}
+
+.qr-name{
+    margin: auto;
+    margin-top: 10%;
+    padding: 5%;
+    background-color: #8a8a8a33;
+    border-radius: 10%;
+}
+
+.qr-code{
+
+}

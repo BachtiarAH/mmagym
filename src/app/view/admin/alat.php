@@ -50,8 +50,9 @@ function JsonToTabel($json)
                     <td class='data-gambar' '> <img src='https://drive.google.com/uc?export=view&id=$gambar' alt='$gambar' srcset=''></td>
                     <td>
                         <div class='row'>
-                            <i data-hapus='".url::BaseUrl()."/alat/delete?id=$id' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash col' data-id='$id'></i>
+                            <i data-hapus='" . url::BaseUrl() . "/alat/delete?id=$id' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash col' data-id='$id'></i>
                             <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat'  data-gambar='$gambar' data-id='$id' data-nama='$nama' onclick='setModelForm(this)'></i>
+                            <i class='fa-solid fa-qrcode' data-toggle='modal' data-target='#modal-qr' data-nama='$nama' data-id='$id' onclick='setData(this)'></i>
                         </div>
                     </td>
                 </tr>
@@ -101,6 +102,12 @@ $dataHtml = JsonToTabel($dataJson);
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <!--
+                             
+
+
+                            
+                            -->
                             <table id="table-alat" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -124,7 +131,7 @@ $dataHtml = JsonToTabel($dataJson);
         <div class="col-sm-4">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">edit / add</h3>
+                    <h3 class="card-title">add</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -163,7 +170,7 @@ $dataHtml = JsonToTabel($dataJson);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?=Url::BaseUrl()?>alat/update" method="post" enctype="multipart/form-data">
+            <form action="<?= Url::BaseUrl() ?>alat/update" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group" id="alatId">
                         <label for="form-id">id</label>
@@ -199,14 +206,40 @@ $dataHtml = JsonToTabel($dataJson);
                 </button>
             </div>
             <div class="modal-body">
-            <p>Apakah and yakin ingin menghapus item ini?</p>
+                <p>Apakah and yakin ingin menghapus item ini?</p>
             </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
-                    <a href="" id="link-delete">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                <a href="" id="link-delete">
                     <button type="button" class="btn btn-danger">iya</button>
-                    </a>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal QR-->
+<div class="modal fade" id="modal-qr" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="qr" class="qr-code-container">
+                    <div  class="qr-code"></div>
+                    <div class='qr-name row'>nama</div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <a id="qr-download" download="" >
+                    <button type="button" class="btn btn-block btn-primary">Download</button>
+                </a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cleaneQr(this)">oke</button>
+            </div>
         </div>
     </div>
 </div>
