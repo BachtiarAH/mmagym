@@ -7,6 +7,30 @@ $result = $api->get("/api/alat/findAll", ['q' => "#php"]);
 // var_dump($result->response);
 $dataJson = $result->response;
 
+if (isset($_SESSION['notification'])) {
+    $title = $_SESSION['notification']['title'];
+    $text = $_SESSION['notification']['text'];
+    if ($_SESSION['notification']['status']) {
+        echo "<script>
+        Toast.fire({
+            icon: 'success',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    } else {
+        echo "<script>
+        Toast.fire({
+            icon: 'error',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    }
+}
+
 function JsonToTabel($json)
 {
     $html = '';
@@ -21,15 +45,14 @@ function JsonToTabel($json)
 
                 $html .= "
                 <tr>
-                    <td class='id' onclick='tbClicked()'> $id </td>
+                ]                    <td class='id' onclick='tbClicked()'> $id </td>
                     <td class='data-nama'  > $nama</td>
                     <td class='data-gambar' '> <img src='https://drive.google.com/uc?export=view&id=$gambar' alt='$gambar' srcset=''></td>
                     <td>
                         <div class='row'>
-                            <a href='".url::BaseUrl()."/alat/delete?id=$id'>
-                                <i class='fa-solid fa-trash col' data-id='$id'></i>
-                            </a>
+                            <i data-hapus='" . url::BaseUrl() . "/alat/delete?id=$id' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash col' data-id='$id'></i>
                             <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat'  data-gambar='$gambar' data-id='$id' data-nama='$nama' onclick='setModelForm(this)'></i>
+                            <i class='fa-solid fa-qrcode' data-toggle='modal' data-target='#modal-qr' data-nama='$nama' data-id='$id' onclick='setData(this)'></i>
                         </div>
                     </td>
                 </tr>
@@ -40,7 +63,6 @@ function JsonToTabel($json)
 
     return $html;
 }
-
 
 $dataHtml = JsonToTabel($dataJson);
 // var_dump($dataHtml);
@@ -80,6 +102,12 @@ $dataHtml = JsonToTabel($dataJson);
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <!--
+                             
+
+
+                            
+                            -->
                             <table id="table-alat" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -103,7 +131,7 @@ $dataHtml = JsonToTabel($dataJson);
         <div class="col-sm-4">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">edit / add</h3>
+                    <h3 class="card-title">add</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
@@ -111,11 +139,11 @@ $dataHtml = JsonToTabel($dataJson);
                     <div class="card-body">
                         <div class="form-group">
                             <label for="form-name">Nama</label>
-                            <input type="text" value="" name="nama" class="form-control" id="form-name" placeholder="">
+                            <input required type="text" value="" name="nama" class="form-control" id="form-name" placeholder="">
                         </div>
                         <label for="form-gambar">Gambar</label>
                         <div class="custom-file form-group">
-                            <input type="file" class="custom-file-input" name="foto-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
+                            <input required type="file" class="custom-file-input" name="foto-alat" id="upload-file-alat" onchange="changeLabelGambarALat()">
                             <label class="custom-file-label" for="customFile" id="form-gambar">Gambar</label>
                         </div>
                     </div>
@@ -142,7 +170,7 @@ $dataHtml = JsonToTabel($dataJson);
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?=Url::BaseUrl()?>alat/update" method="post" enctype="multipart/form-data">
+            <form action="<?= Url::BaseUrl() ?>alat/update" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group" id="alatId">
                         <label for="form-id">id</label>
@@ -167,3 +195,51 @@ $dataHtml = JsonToTabel($dataJson);
     </div>
 </div>
 <!-- /.content-header -->
+<!-- Modal -->
+<div class="modal fade" id="model_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah and yakin ingin menghapus item ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                <a href="" id="link-delete">
+                    <button type="button" class="btn btn-danger">iya</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal QR-->
+<div class="modal fade" id="modal-qr" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="qr" class="qr-code-container">
+                    <div  class="qr-code"></div>
+                    <div class='qr-name row'>nama</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="qr-download" download="" >
+                    <button type="button" class="btn btn-block btn-primary">Download</button>
+                </a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cleaneQr(this)">oke</button>
+            </div>
+        </div>
+    </div>
+</div>

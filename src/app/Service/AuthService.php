@@ -19,6 +19,61 @@ class AuthService extends Service
         $this->otpRepo = $otpRepo;
     }
 
+    public function loginAdmin($request)
+    {
+        if (isset($request->email) && isset($request->password)) {
+            $email = $request->email;
+            $password = $request->password;
+            $jsonResult = $this->userRepo->findByEmail($email);
+            // var_dump($jsonResult == NULL);
+            // var_dump($jsonResult);
+            
+            if (isset($jsonResult['body'][0])) {
+                $emailResult = $jsonResult['body'][0]['email'];
+                $passwordResult = $jsonResult['body'][0]['password'];
+                $akses = $jsonResult['body'][0]['akses'];
+                // echo $emailResult;
+                if ($email == $emailResult) {
+
+                    if ($password == $passwordResult) {
+                        if ($akses == 2) {
+                            return [
+                                'status' => 'login success',
+                                'body' => $jsonResult['body'],
+                                'message' => 'login success'
+                            ];
+                        } else if ($akses == 1) {
+                            return [
+                                'status' => 'login fail',
+                                'message' => 'akun anda tidak memiliki akses'
+                            ];
+                        } elseif ($akses == 0) {
+                            return [
+                                'status' => 'login fail',
+                                'message' => 'email belum di verifikasi'
+                            ];
+                        }
+                    } else {
+                        return [
+                            'status' => 'login fail',
+                            'message' => 'password salah'
+                        ];
+                    }
+                }
+            } else {
+                return [
+                    'status' => 'login fail',
+                    'message' => 'email belum terdaftar'
+                ];
+            }
+        } else {
+            return [
+                'status' => 'fail',
+                'message' => 'format json kalah'
+            ];
+        }
+    }
+
     public function login($request)
     {
         if (isset($request->email) && isset($request->password)) {
@@ -30,31 +85,47 @@ class AuthService extends Service
                 $passwordResult = $jsonResult['body'][0]['password'];
                 $akses = $jsonResult['body'][0]['akses'];
                 // echo $emailResult;
-                if ($email == $emailResult && $password == $passwordResult && $akses != 0) {
-                    return [
-                        'status' => 'login success',
-                        'body' => $jsonResult['body']
-                    ];
-                } else if (isEmpty($jsonResult)) {
+                if ($email == $emailResult) {
+                    if ($password == $passwordResult) {
+                        if ($akses > 0) {
+                            return [
+                                'status' => 'login success',
+                                'body' => $jsonResult['body'],
+                                'message' => 'login success'
+                            ];
+                        }else {
+                            return [
+                                'status' => 'fail',
+                                'body' => "",
+                                'message' => 'email belum diverifikasi'
+                            ];
+                        }
+                        
+                    } else {
+                        return [
+                            'status' => 'fail',
+                            'body' => "",
+                            'message' => 'password salah'
+                        ];
+                    }
+                } else {
                     return [
                         'status' => 'login fail',
-                        'message' => 'email unregistered'
-                    ];
-                } else if ($akses == 0) {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'email belum di verifikasi'
-                    ];
-                } {
-                    return [
-                        'status' => 'login fail',
-                        'message' => 'password is wrong'
+                        'body' => "",
+                        'message' => 'email tidak terdaftar'
                     ];
                 }
+            }else {
+                return [
+                    'status' => 'login fail',
+                    'body' => "",
+                    'message' => 'email tidak terdaftar'
+                ];
             }
         } else {
             return [
                 'status' => 'fail',
+                'body' => "",
                 'message' => 'format json kalah'
             ];
         }
@@ -161,34 +232,30 @@ class AuthService extends Service
     public function resetPassword($request)
     {
         if (isset($request->email) && isset($request->otp) && isset($request->newpassword)) {
-            $OtpResult = $this->otpRepo->findOtp($request->email,$request->otp);
-            if (count($OtpResult['body'])>0) {
-                $this->userRepo->editPassword($request->email,$request->newpassword);
+            $OtpResult = $this->otpRepo->findOtp($request->email, $request->otp);
+            if (count($OtpResult['body']) > 0) {
+                $this->userRepo->editPassword($request->email, $request->newpassword);
                 $this->otpRepo->deleteOtp($request->email);
                 return ['status' => 'success', 'message' => 'password berhasil diperbarui'];
             } else {
                 return ['status' => 'fail', 'message' => 'code otp salah'];
             }
-            
         } else {
             return $this->FailResponse('format');
         }
-        
     }
 
     public function cekOtp($request)
     {
         if (isset($request->email) && isset($request->otp)) {
             $resultOtp = $this->otpRepo->findOtp($request->email, $request->otp);
-            if (count($resultOtp['body'])>0) {
+            if (count($resultOtp['body']) > 0) {
                 return ['status' => 'success', 'message' => 'otp benar'];
             } else {
                 return ['status' => 'fail', 'message' => 'otp salah'];
             }
-            
         } else {
             return $this->FailResponse('format');
         }
-        
     }
 }

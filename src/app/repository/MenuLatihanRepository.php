@@ -159,6 +159,51 @@ class MenuLatihanRepository
         return $respons;
     }
 
+    public function updateData($id,$nama,$part,$level,$gambar)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "UPDATE `menu_latihan` SET 
+                `nama_menu_latihan`='$nama',
+                `part`='$part',
+                `level`='$level',
+                `gambar`='$gambar' 
+                WHERE id_menu_latihan = $id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
+    public function deleteData($id)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "DELETE FROM `menu_latihan` WHERE id_menu_latihan = $id";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
+
     public function addRincian($repetisi,$set,$note,$id_gerakan,$id_menu_latihan)
     {
         $respons = array();

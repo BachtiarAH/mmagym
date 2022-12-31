@@ -18,3 +18,20 @@ function setModalData(even) {
     formSet.value = set;
     formIdRincian.value = id;
 }
+
+function setModalMenuEdit(even) {
+    id = even.getAttribute('data-id');
+    nama = even.getAttribute('data-nama');
+    part = even.getAttribute('data-part');
+    level = even.getAttribute('data-level');
+
+    formid = document.getElementById('model-form-id-edit');
+    formNama = document.getElementById('model-form-name-edit');
+    formpart = document.getElementById('model-form-part-edit');
+    formlevel = document.getElementById('model-form-level-edit');
+
+    formid.value = id;
+    formNama.value = nama;
+    formpart.value = part;
+    formlevel.value = level; 
+}

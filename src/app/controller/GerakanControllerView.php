@@ -13,7 +13,9 @@ class GerakanControllerView
 {
     protected $model = [
         'title' => "MMA GYM",
-        'content' => "Login"
+        'content' => "Login",
+        'aktif'=>'inventory',
+        'inventory'=>'gerakan'
     ];
 
     public function index()
@@ -23,6 +25,7 @@ class GerakanControllerView
 
     public function addData()
     {
+        session_start();
         $curl = curl_init();
         $foto = $_FILES['foto-gerakan']['tmp_name'];
         $video = $_FILES['video-gerakan']['tmp_name'];
@@ -50,13 +53,22 @@ class GerakanControllerView
 
         curl_close($curl);
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-            echo "<script>
-            function myFunction() {
-            alert('$response');
-            }
-            </script>
-            ";
-            header("location:" . url::BaseUrl() . 'gerakan');
+            $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'tambah data berhasil',
+                        'text' => "gerakan dengan nama $nama berhasil ditamabah"
+                    ];
+                    View::redirect('gerakan');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'tamaba data gagal',
+                        'text' => "user dengan nama $nama gagal ditambah"
+                    ];
+                    View::redirect('gerakan');
+                }
         } else {
             echo "<script>
             function myFunction() {
@@ -69,12 +81,13 @@ class GerakanControllerView
 
     public function delete()
     {
+        session_start();
         $idgerakan = $_GET['id'];
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://localhost/mmagym/src/public//api/gerakan/delete',
+            CURLOPT_URL => Url::BaseUrl().'api/gerakan/delete',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -92,13 +105,22 @@ class GerakanControllerView
 
         curl_close($curl);
         if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-            echo "<script>
-            function myFunction() {
-            alert('$response');
-            }
-            </script>
-            ";
-            header("location:" . url::BaseUrl() . 'gerakan');
+            $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'hapus data berhasil',
+                        'text' => "gerakan dengan id $idgerakan berhasil dihapus"
+                    ];
+                    View::redirect('gerakan');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'hapus data gagal',
+                        'text' => "gerakan dengan id $idgerakan gagal dihapus"
+                    ];
+                    View::redirect('gerakan');
+                }
         } else {
             echo "<script>
             function myFunction() {
@@ -111,6 +133,7 @@ class GerakanControllerView
 
     public function edit()
     {
+        session_start();
         $id = $_POST['id'];
         $nama = $_POST['nama'];
         $gamabar = $_FILES['foto-gerakan']['tmp_name'];
@@ -145,8 +168,22 @@ class GerakanControllerView
 
             curl_close($curl);
             if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-                echo $response;
-                header("location:" . url::BaseUrl() . 'gerakan');
+                $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'edit data berhasil',
+                        'text' => "gerakan dengan id $id berhasil diedit"
+                    ];
+                    View::redirect('gerakan');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'edit data gagal',
+                        'text' => "gerakan dengan id $id gagal diedit"
+                    ];
+                    View::redirect('gerakan');
+                }
             } else {
                 echo $response;
             }
@@ -175,8 +212,22 @@ class GerakanControllerView
 
             curl_close($curl);
             if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-                echo $response;
-                header("location:" . url::BaseUrl() . 'gerakan');
+                $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'edit data berhasil',
+                        'text' => "gerakan dengan id $id berhasil diedit"
+                    ];
+                    View::redirect('gerakan');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'edit data gagal',
+                        'text' => "gerakan dengan id $id gagal diedit"
+                    ];
+                    View::redirect('gerakan');
+                }
             } else {
                 echo $response;
             }
@@ -205,8 +256,22 @@ class GerakanControllerView
             echo $response;
             curl_close($curl);
             if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 200) {
-                echo $response;
-                header("location:" . url::BaseUrl() . 'gerakan');
+                $status = json_decode($response)->status;
+                if ($status == 'succes') {
+                    $_SESSION['notification'] = [
+                        'status' => true,
+                        'title' => 'edit data berhasil',
+                        'text' => "gerakan dengan id $id berhasil diedit"
+                    ];
+                    View::redirect('gerakan');
+                } else {
+                    $_SESSION['notification'] = [
+                        'status' => false,
+                        'title' => 'edit data gagal',
+                        'text' => "gerakan dengan id $id gagal diedit"
+                    ];
+                    View::redirect('gerakan');
+                }
             } else {
                 echo $response;
             }

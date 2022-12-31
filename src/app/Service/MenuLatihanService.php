@@ -37,6 +37,41 @@ class MenuLatihanService extends Service{
         
     }
 
+    public function editData($post, $file)
+    {
+        if (isset($post['id']) && isset($post['nama']) && isset($post['part']) && isset($post['level']) && isset($file['foto-menu'])) {
+            $resulltRepo = $this->repo->findById($post['id']);
+            $fileId = $resulltRepo['body'][0]['gambar'];
+            $idFoto = $this->googleDriveReplaceFile($fileId,'foto-menu',$file,'1cPTSAED5B2OVkXa1bf0Pug1XrMaEha1g');
+            return $this->repo->updateData($post['id'],$post['nama'],$post['part'],$post['level'],$idFoto);
+        } else {
+            return $this->FailResponse('format');
+        }
+    }
+
+    public function editDataNoFOto($post)
+    {
+        if (isset($post['id']) && isset($post['nama']) && isset($post['part']) && isset($post['level'])) {
+            $resulltRepo = $this->repo->findById($post['id']);
+            $fileId = $resulltRepo['body'][0]['gambar'];
+            return $this->repo->updateData($post['id'],$post['nama'],$post['part'],$post['level'],$fileId);
+        } else {
+            return $this->FailResponse('format');
+        }
+    }
+
+    public function deleteData($data)
+    {
+        if (isset($data->id)) {
+            $resulltRepo = $this->repo->findById($data->id);
+            $fileId = $resulltRepo['body'][0]['gambar'];
+            $this->googleDriveDelete($fileId);
+            return $this->repo->deleteData($data->id);
+        } else {
+            return $this->FailResponse('format');
+        }
+    }
+
     public function findById($get)
     {
         if (isset($get['id'])) {

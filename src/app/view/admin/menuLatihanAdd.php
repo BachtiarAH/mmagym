@@ -2,6 +2,30 @@
 
 use LearnPhpMvc\Config\Url;
 
+if (isset($_SESSION['notification'])) {
+    $title = $_SESSION['notification']['title'];
+    $text = $_SESSION['notification']['text'];
+    if ($_SESSION['notification']['status']) {
+        echo "<script>
+        Toast.fire({
+            icon: 'success',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    } else {
+        echo "<script>
+        Toast.fire({
+            icon: 'error',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    }
+}
+
 function getData($id)
 {
     $curl = curl_init();
@@ -56,9 +80,7 @@ function JsonToTabel($json)
                     <td class='data-nama'  > $set</td>
                     <td>
                         <div class='row'>
-                            <a href='" . Url::BaseUrl() . "menuAdd/delete?id=$id&id_menu=$id_menu'>
-                                <i class='fa-solid fa-trash col' data-id='$id'></i>
-                            </a>
+                        <i data-hapus='".url::BaseUrl()."menuAdd/delete?id=$id&id_menu=$id_menu' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash col' data-id='$id'></i>
                             <i data-toggle='modal' data-target='#modal-edit-detail-menu' class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat' data-id='$id' data-nama='$nama' data-id-gerakan='$idGerakan' data-note='$note' data-repetisi='$repetisi' data-set='$set' onclick='setModalData(this)'></i>
                         </div>
                     </td>
@@ -119,7 +141,7 @@ function getDataMenu()
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => Url::BaseUrl().'api/menu/id?id='.$_GET['id'],
+        CURLOPT_URL => Url::BaseUrl() . 'api/menu/id?id=' . $_GET['id'],
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -190,15 +212,15 @@ $ArrResponse = json_decode(getData($_GET['id']), true);
         </div>
         <div class="col-4">
             <div class="card">
-                <div class="card-header">tambah rincian</div>
+                <div class="card-header">Menu Latihan</div>
                 <div class="card-body">
                     <label for="form-gambar">Gambar</label>
                     <div class="data-gambar" id="model-container-gambar">
-                        <img src='https://drive.google.com/uc?export=view&id=<?=$dataMenu->body[0]->gambar?>' alt='$gambar' srcset=''></td>
+                        <img src='https://drive.google.com/uc?export=view&id=<?= $dataMenu->body[0]->gambar ?>' alt='$gambar' srcset=''></td>
                     </div>
                     <div class="form-group">
                         <label for="form-name">Nama</label>
-                        <input readonly type="text" value="<?=$dataMenu->body[0]->nama?>" name="nama" class="form-control" id="model-form-name" placeholder="">
+                        <input readonly type="text" value="<?= $dataMenu->body[0]->nama ?>" name="nama" class="form-control" id="model-form-name" placeholder="">
                     </div>
                     <div class="form-group">
                         <label>Part</label>
@@ -208,8 +230,6 @@ $ArrResponse = json_decode(getData($_GET['id']), true);
                         <label>Level</label>
                         <input readonly type="text" value="<?= $dataMenu->body[0]->level ?>" name="part" class="form-control" id="model-form-name" placeholder="">
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -298,4 +318,27 @@ $ArrResponse = json_decode(getData($_GET['id']), true);
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="model_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Apakah and yakin ingin menghapus item ini?</p>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                    <a href="" id="link-delete">
+                    <button type="button" class="btn btn-danger">iya</button>
+                    </a>
+                </div>
+        </div>
+    </div>
 </div>

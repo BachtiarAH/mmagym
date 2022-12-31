@@ -2,25 +2,51 @@
 
 use LearnPhpMvc\Config\Url;
 
+if (isset($_SESSION['notification'])) {
+    $title = $_SESSION['notification']['title'];
+    $text = $_SESSION['notification']['text'];
+    if ($_SESSION['notification']['status']) {
+        echo "<script>
+        Toast.fire({
+            icon: 'success',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    } else {
+        echo "<script>
+        Toast.fire({
+            icon: 'error',
+            title: '$title',
+            text: '$text',
+            })
+    </script>";
+        unset($_SESSION['notification']);
+    }
+}
+
+
+
 function getuser()
 {
     $curl = curl_init();
 
-curl_setopt_array($curl, array(
-		CURLOPT_URL => url::BaseUrl().'/api/user/all',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'GET',
-));
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => url::BaseUrl() . '/api/user/all',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
 
-$response = curl_exec($curl);
+    $response = curl_exec($curl);
 
-curl_close($curl);
-return $response;
+    curl_close($curl);
+    return $response;
 }
 
 function JsonToTabel($json)
@@ -35,7 +61,7 @@ function JsonToTabel($json)
                 $nama = $data[$i]->nama;
                 $password = $data[$i]->password;
                 $password_sensored = '';
-                for ($j=0; $j < strlen($password); $j++) { 
+                for ($j = 0; $j < strlen($password); $j++) {
                     $password_sensored .= '*';
                 }
                 $email = $data[$i]->email;
@@ -44,13 +70,13 @@ function JsonToTabel($json)
                 $hakAkses = 'user';
                 if ($aksesIndex == 1) {
                     $hakAkses = 'user';
-                } else if($aksesIndex == 2){
+                } else if ($aksesIndex == 2) {
                     $hakAkses = 'admin';
-                }else{
+                } else {
                     $hakAkses = 'unknow';
                 }
-                
-                
+
+
                 $html .= "
                 <tr>
                     <td>$id</td>
@@ -61,10 +87,8 @@ function JsonToTabel($json)
                     <td data-akses='$aksesIndex'>$hakAkses</td>
                     <td>
                         <div class='row'>
-                            <a href='" . url::BaseUrl() . "/alat/delete?id=$id'>
-                                <i class='fa-solid fa-trash col' data-id='$id'></i>
-                            </a>
-                            <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#model_form_alat' data-email='$email' data-id='$id' data-nama='$nama' data-alamat='$alamat' data-akses='$aksesIndex' onclick='setModelForm(this)'></i>
+                            <i data-hapus='".url::BaseUrl()."user/delete?id=$id' onclick='setLinkALatDelete(this)' data-toggle='modal' data-target='#model_delete' class='fa-solid fa-trash col' data-id='$id'></i>
+                            <i class='fa-solid fa-pen-to-square col' class='btn btn-primary' data-toggle='modal' data-target='#modal_form_user_edit' data-email='$email' data-id='$id' data-nama='$nama' data-alamat='$alamat' data-akses='$aksesIndex' data-password='$password' onclick='setModalUserEdit(this)'></i>
                         </div>
                     </td>
                 </tr>
@@ -100,7 +124,7 @@ $dataHtml = JsonToTabel($responseJson);
                     <!-- /.card-header -->
                     <div class="card-body">
 
-                        <table id="table-user" class="table table-bordered table-striped">
+                        <table id="table-users" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>id</th>
@@ -112,7 +136,7 @@ $dataHtml = JsonToTabel($responseJson);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?=$dataHtml?>
+                                <?= $dataHtml ?>
                             </tbody>
                         </table>
                     </div>
@@ -130,23 +154,31 @@ $dataHtml = JsonToTabel($responseJson);
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form>
+            <form action="<?= Url::BaseUrl() ?>user/add" method="POST">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Nama</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter email">
+                        <input type="text" class="form-control" name="nama" required placeholder="Enter email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <input type="email" class="form-control" name="email" required placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                        <input type="password" class="form-control" name="password" required placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label>Alamat</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <textarea class="form-control" name="alamat" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Akses</label>
+                        <select class="form-control" name="akses" required>
+                            <option value="2">admin</option>
+                            <option value="1" selected>user</option>
+                        </select>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -158,6 +190,75 @@ $dataHtml = JsonToTabel($responseJson);
         </div>
 
 
-
     </div>
     <!-- /.content-header -->
+    <!-- Modal -->
+    <div class="modal fade" id="modal_form_user_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Alat</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="<?= Url::BaseUrl() ?>user/edit" method="post">
+                    <div class="modal-body">
+                        <input type="text" value="" name="id" id="modal-form-id" hidden>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nama</label>
+                            <input type="text" class="form-control" id="modal-form-nama" name="nama" required placeholder="Enter email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="modal-form-email" name="email" required placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="modal-form-password" name="password" required placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <textarea class="form-control" name="alamat" id="modal-form-alamat" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Akses</label>
+                            <select class="form-control" name="akses" id="modal-form-akses" required>
+                                <option value="2">admin</option>
+                                <option value="1" selected>user</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Modal -->
+<div class="modal fade" id="model_delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Warning!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <p>Apakah and yakin ingin menghapus item ini?</p>
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">batal</button>
+                    <a href="" id="link-delete">
+                    <button type="button" class="btn btn-danger">iya</button>
+                    </a>
+                </div>
+        </div>
+    </div>
+</div>

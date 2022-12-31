@@ -16,6 +16,13 @@ class AuthController{
         $this->service = new AuthService($userrRpo,$otpRepo);
     }
 
+    public function loginAdmin()
+    {
+        $json = file_get_contents('php://input');
+        $request = json_decode($json);
+        echo json_encode($this->service->loginAdmin($request));
+    }
+
     public function login()
     {
         $json = file_get_contents('php://input');

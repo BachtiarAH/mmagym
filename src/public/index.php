@@ -29,6 +29,7 @@ use LearnPhpMvc\controller\UsersControllerView;
 //api
 
 //auth
+Router::add('POST','/api/auth/login/admin',AuthController::class,'loginAdmin');
 Router::add('POST','/api/auth/login',AuthController::class,'login');
 Router::add('POST','/api/auth/register',AuthController::class,'register');
 Router::add('POST','/api/auth/register/verif',AuthController::class,'verifyOtp');
@@ -77,6 +78,9 @@ Router::add('GET','/api/gerakan/all',GerakanController::class,'findAll');
 Router::add('GET','/api/menu/all',MenuLatihanController::class,'findAll');
 Router::add('POST','/api/menu/rincian',MenuLatihanController::class,'findRincianMenuLatihan');
 Router::add('POST','/api/menu/add',MenuLatihanController::class,'addData');
+Router::add('POST','/api/menu/update',MenuLatihanController::class,'editData');
+Router::add('POST','/api/menu/updateNoFot',MenuLatihanController::class,'editNoGambar');
+Router::add('POST','/api/menu/delete',MenuLatihanController::class,'deleteData');
 Router::add('POST','/api/menu/add/rincian',MenuLatihanController::class,'addRician');
 Router::add('POST','/api/menu/delete/rincian',MenuLatihanController::class,'deleteDataRincian');
 Router::add('POST','/api/menu/update/rincian',MenuLatihanController::class,'updateDataRincian');
@@ -94,9 +98,12 @@ Router::add('POST','/api/riwayat/user',RiwayatController::class,'findRiwayatGera
 Router::add('GET', '/admin/login', LoginController::class, 'index');
 Router::add('GET', '/', LandingPageController::class, 'index');
 Router::add('POST', '/submit/login', LoginController::class, 'login');
+Router::add('GET', '/logout', LoginController::class, 'logOut');
 
 //admin
 Router::add('GET', '/admin', HomeController::class, 'index');
+Router::add('POST', '/admin', HomeController::class, 'index');
+Router::add('POST', '/admin/editProfil', HomeController::class, 'editDataProfil');
 
 //alat
 Router::add('GET', '/alat', AlatControllerView::class, 'index');
@@ -104,7 +111,11 @@ Router::add('POST', '/alat/update', AlatControllerView::class, 'update');
 Router::add('POST', '/alat/add', AlatControllerView::class, 'add');
 Router::add('GET', '/alat/delete', AlatControllerView::class, 'delete');
 
+//user
 Router::add('GET', '/user', UsersControllerView::class, 'index');
+Router::add('POST', '/user/add', UsersControllerView::class, 'add');
+Router::add('POST', '/user/edit', UsersControllerView::class, 'edit');
+Router::add('GET', '/user/delete', UsersControllerView::class, 'delete');
 
 //gerakan
 Router::add('GET', '/gerakan', GerakanControllerView::class, 'index');
@@ -114,10 +125,12 @@ Router::add('GET', '/gerakan/delete', GerakanControllerView::class, 'delete');
 
 //menu latihan
 Router::add('GET', '/menu', MenuLatihanControllerView::class, 'index');
+Router::add('GET', '/menu/delete', MenuLatihanControllerView::class, 'deletData');
 Router::add('GET', '/menuAdd', MenuLatihanControllerView::class, 'renderAdd');
 Router::add('GET', '/menuAdd/delete', MenuLatihanControllerView::class, 'deleteRincian');
 Router::add('POST', '/menuAdd/edit', MenuLatihanControllerView::class, 'editRincian');
 Router::add('POST', '/menu/add', MenuLatihanControllerView::class, 'add');
+Router::add('POST', '/menu/edit', MenuLatihanControllerView::class, 'edit');
 Router::add('POST', '/menu/add/rincian', MenuLatihanControllerView::class, 'rincianMenuAdd');
 
 Router::add('POST', '/company/search', CompanyController::class, 'search');
