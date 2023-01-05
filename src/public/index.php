@@ -88,9 +88,12 @@ Router::add('GET','/api/menu/id',MenuLatihanController::class,'findById');
 
 //api jadwal
 Router::add('POST','/api/jadwal/user',JadwalController::class,'findByUser');
+Router::add('POST','/api/jadwal/user/add',JadwalController::class,'addData');
+Router::add('GET','/api/jadwal/user',JadwalController::class,'findByIdUser');
 
 //api riwayat
 Router::add('POST','/api/riwayat/user',RiwayatController::class,'findRiwayatGerakanByUser');
+Router::add('POST','/api/riwayat/add',RiwayatController::class,'addRiwayat');
 
 
 

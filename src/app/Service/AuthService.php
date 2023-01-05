@@ -96,7 +96,7 @@ class AuthService extends Service
                         }else {
                             return [
                                 'status' => 'fail',
-                                'body' => "",
+                                'body' => [],
                                 'message' => 'email belum diverifikasi'
                             ];
                         }
@@ -104,28 +104,28 @@ class AuthService extends Service
                     } else {
                         return [
                             'status' => 'fail',
-                            'body' => "",
+                            'body' => [],
                             'message' => 'password salah'
                         ];
                     }
                 } else {
                     return [
                         'status' => 'login fail',
-                        'body' => "",
+                        'body' => [],
                         'message' => 'email tidak terdaftar'
                     ];
                 }
             }else {
                 return [
                     'status' => 'login fail',
-                    'body' => "",
+                    'body' => [],
                     'message' => 'email tidak terdaftar'
                 ];
             }
         } else {
             return [
                 'status' => 'fail',
-                'body' => "",
+                'body' => [],
                 'message' => 'format json kalah'
             ];
         }
@@ -186,7 +186,7 @@ class AuthService extends Service
     {
         if (isset($request->email)) {
             $otpRepoResult =  $this->otpRepo->findByEmail($request->email);
-            if ($otpRepoResult['body'] > 0) {
+            if (!empty($userRepoResult['body'])) {
                 $otp = rand(1000, 9999);
                 $this->otpRepo->updateOtp($request->email, $otp);
                 $bodyMail = "
@@ -209,7 +209,8 @@ class AuthService extends Service
     {
         if (isset($request->email)) {
             $userRepoResult = $this->userRepo->findByEmail($request->email);
-            if ($userRepoResult['body'] > 0) {
+            // var_dump($userRepoResult['body']);
+            if (!empty($userRepoResult['body']) ) {
                 $otp = rand(1000, 9999); //membuat random digit dari 1000 samapai 9999 yang akan selalu 4 digit angka
                 $this->otpRepo->addOtp($request->email, $otp);
 

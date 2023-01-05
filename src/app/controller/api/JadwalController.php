@@ -20,4 +20,16 @@ class JadwalController{
         $data = json_decode($json);
         echo json_encode($this->service->findByUser($data));
     }
+
+    public function addData()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->addData($data));
+    }
+
+    public function findByIdUser()
+    {
+        echo json_encode($this->service->getJadwalByIdUser($_GET));
+    }
 }

@@ -177,6 +177,7 @@ class userRepository
     {
         $respons = array();
         $respons['status'] = '';
+        $respons['massage'] = '';
         // $respons['respons_code'] = "";
         try {
             $sql = "INSERT INTO `usermma` (`id`, `nama`, `password`, `email`, `Alamat`, `akses`)
@@ -190,6 +191,7 @@ class userRepository
             $stmt = $this->connection->prepare($sql);
             $stmt->execute();
             $respons['status'] = 'succes';
+            $respons['massage'] = 'data user berhasil ditambah';
             // $respons['respons_code'] = "200";
         } catch (\Throwable $th) {
             $respons['status'] = 'fail';
@@ -217,6 +219,7 @@ class userRepository
             $stmt = $this->connection->prepare($sql);
             $stmt->execute();
             $respons['status'] = 'succes';
+            $respons['massage'] = 'data berhasil diubah';
             // $respons['respons_code'] = "200";
         } catch (\Throwable $th) {
             $respons['status'] = 'fail';

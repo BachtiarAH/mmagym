@@ -21,4 +21,11 @@ class RiwayatController{
         $data = json_decode($json);
         echo json_encode($this->service->findRiwayatGerakanByUser($data));
     }
+
+    public function addRiwayat()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json);
+        echo json_encode($this->service->addData($data));
+    }
 }

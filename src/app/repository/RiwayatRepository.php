@@ -44,4 +44,25 @@ class RiwayatRepository{
 
         return $respons;
     }
+
+    public function addRiwayat($tanggal, $idUser, $idGerakan)
+    {
+        $respons = array();
+        $respons['status'] = '';
+        // $respons['respons_code'] = "";
+        try {
+            $sql = "INSERT INTO `riwayat`(`tanggal_waktu`, `id`, `id_gerakan`) VALUES ('$tanggal','$idUser','$idGerakan')";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->execute();
+            $respons['status'] = 'succes';
+            $respons['massage'] = "riwayat ditambahkan";
+            // $respons['respons_code'] = "200";
+        } catch (\Throwable $th) {
+            $respons['status'] = 'fail';
+            // $respons['respons_code'] = "200";
+            $respons['massage'] = $th->getMessage();
+        }
+
+        return $respons;
+    }
 }
