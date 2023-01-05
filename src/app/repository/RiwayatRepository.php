@@ -33,9 +33,12 @@ class RiwayatRepository{
                     );
                     array_push($respons['body'], $item);
                 }
+
+                $respons['massage'] = "succces";
             } else {
                 $respons['status'] = "fail";
                 $respons['massage'] = "data tidak ada";
+                array_push($respons['body'], );
             }
         } catch (PDOException $th) {
             $respons['status'] = 'fail';
